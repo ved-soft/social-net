@@ -1,0 +1,5 @@
+django
+django-tastypie==0.9.15
+django-extensions
+Werkzeug
+path.py

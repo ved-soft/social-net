@@ -1,0 +1,11 @@
+[
+	{
+    "pk": 1,
+    "model": "app.person",
+    "fields": {
+      	"gender": 0,
+        "phone": "4561285689"
+        		}
+    }
+
+]
