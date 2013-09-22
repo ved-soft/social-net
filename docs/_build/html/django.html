@@ -1,0 +1,776 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Django &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="next" title="Tastypie" href="tastypie.html" />
+    <link rel="prev" title="Test Driven Development (TDD)" href="tdd.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tastypie.html" title="Tastypie"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tdd.html" title="Test Driven Development (TDD)"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Django</a><ul>
+<li><a class="reference internal" href="#id2">Вовед во Django</a></li>
+<li><a class="reference internal" href="#id5">Модели</a></li>
+<li><a class="reference internal" href="#socialnet">Модели во SocialNet</a></li>
+<li><a class="reference internal" href="#id12">Интеракција со податоци во Django</a></li>
+<li><a class="reference internal" href="#id14">Креирање на  методи во SocialNet</a></li>
+<li><a class="reference internal" href="#django-unit-tests">Django Unit Tests</a></li>
+<li><a class="reference internal" href="#unit-tests-socialnet">Unit Tests во SocialNet</a></li>
+<li><a class="reference internal" href="#django-forms">Django Forms</a></li>
+<li><a class="reference internal" href="#forms-socialnet">Forms во SocialNet</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tdd.html"
+                        title="previous chapter">Test Driven Development (TDD)</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tastypie.html"
+                        title="next chapter">Tastypie</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/django.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="django">
+<span id="id1"></span><h1>Django<a class="headerlink" href="#django" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>Вовед во Django<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Django  претставува Python Framework која што овозможува брзо развивање на
+web апликации со python код. Django  е open source со BCD  лиценца, што значи
+неговиот код е целосно достапен.
+Django  како web framework овозможува пишување на серверски код и рендерирање
+на front end  темплејти. Во понатамошното излагање ќе се задржиме само на
+серверските карактеристи што ги овозможува django во комбинација со tastypie
+за кои што ќе зборуваме подоцна.
+Django во голема мера ја следи MVC архитектурата при што има интегрирано
+сопствно ORM  за работа со база кое што доста го олеснува процесот на работа
+со податоци. За секој проект да биде своја засебна целина и да
+користи посебна python околина користиме vitrualenv, пред да почнеме со
+креирање на проектот потребно е да искреираме виртуелна околина во која што ќе
+ни се наоѓа проектот и која што ќе го користи нејзиниот python интерпретер.</p>
+<p>За да може да се креира виртуелна околина потребно е да се исталира
+<tt class="docutils literal"><span class="pre">easy_install</span></tt> за python да може да ги исталираме најновите верзии на пакети.
+Се исталира со командата:</p>
+<div class="highlight-python"><pre>sudo apt-get install python-setuptools</pre>
+</div>
+<p>Потоа со помош на него се инсталира virtualenv за креирање на
+виртуелни python околина:</p>
+<div class="highlight-python"><pre>sudo easy_install virtualenv</pre>
+</div>
+<p>Најпрвин креираме нова виртуелна околина за нашиот проект:</p>
+<div class="highlight-python"><pre>virtualenv &lt;project_name&gt;</pre>
+</div>
+<p>За ова потребно е да бидеме во фолдерот каде што сакаме да
+биде сместена нашата виртуелна околина.
+Пред да се направи активација на виртуелната околина потребно е да се направи
+уште едно подесување во <tt class="docutils literal"><span class="pre">bin/activate</span></tt> фајлот. На кајот од самиот фајл
+потребно е да се внесеат следните линии код:</p>
+<div class="highlight-python"><pre># Django
+export PYTHONPATH="$VIRTUAL_ENV/project"
+export DJANGO_SETTINGS_MODULE=settings
+# Aliases for easier operation
+alias run='$VIRTUAL_ENV/project/run_local_server.sh'</pre>
+</div>
+<p>Всушност со овие три линии код ја додаваме патеката на проектот во pythonpath,
+после тоа го дефинираме django_settings_module и последната линија ни
+овозможува стартување на серверот со run команда од кој било директориум кога
+сме во активна виртуелна околина.</p>
+<p>Наредено што треба да се направи е активација на истата:</p>
+<div class="highlight-python"><pre>. bin/activate</pre>
+</div>
+<p>Откако сме веќе во виртуелната околина потребно е да исталираме <tt class="docutils literal"><span class="pre">django</span></tt> со
+<tt class="docutils literal"><span class="pre">pip</span></tt> се исталира последната офицјална верзија:</p>
+<div class="highlight-python"><pre>Pip install django</pre>
+</div>
+<p>За креирање на django  проект повеќе информации можат да се најдат на следниов
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/intro/tutorial01/">линк</a></p>
+<p>Во нашиов туториал работиме со веќе креиран проект кои ги има само
+основните конфигурациски фајлови.</p>
+<p>Како развојна околина користиме Eclipse со исталиран pydev додаток за python.
+Наредно што треба да направиме е да направиме import проектот во Eclipse.
+На следниов <a class="reference external" href="http://vaboone.wordpress.com/2010/11/22/import-a-django-project-into-eclipse/">линк</a>
+детално е објаснето како да го внесете вашиот django проект во Eclipse.</p>
+<p>Еден django проект може да се состои од една или повеќе апликации.
+Постојат различни структурирања на django проектите во зависност од обемот и
+потребите на истиот.
+Структурата на нашите проекти е прикажана на следната слика.
+<tt class="docutils literal"><span class="pre">(Слика</span> <span class="pre">со</span> <span class="pre">структура</span> <span class="pre">на</span> <span class="pre">проект)</span></tt></p>
+<p>Секоја апликација се состои од нејзини пакети(&#8216;api&#8217;, &#8216;models&#8217;, &#8216;tests&#8217;) кои што
+се составени од посебни модули за секоја целина оделно. На овој начин
+секоја целина од кодот посебно е одвоена и лесна како за развивање така и за
+понатамошно одржување.
+Нареден чекор е да ги направиме основните подесувања во <tt class="docutils literal"><span class="pre">settings</span></tt> фајлот на проектот.
+Детално објасување за истиот можете да најдате во django документацијата.
+Најголемиот дел од параметрите за нашиов проект можат да си останат
+како што се моментално. Единствено потребно е да ја исконфигурираме
+базата на податоци која што ќе ја користи нашиот проект.
+За овој проект ќе користиме sqlite3 база на податоци.</p>
+<p>За да провериме дали проектот правилно е подесен го стартуваме
+серверот со скриптата:</p>
+<div class="highlight-python"><pre>./run_local_server</pre>
+</div>
+<p>И на интернет прилистувач венсуваме <tt class="docutils literal"><span class="pre">127.0.0.1:8000/admin/</span></tt>
+При што треба да се појаву admin панелот. <tt class="docutils literal"><span class="pre">(ПРИКАЖИ</span> <span class="pre">СЛИКА)</span></tt></p>
+</div>
+<div class="section" id="id5">
+<h2>Модели<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Моделите ни овозможуваат на поедноставен начин да дадеме репрезентација на
+структурата на база на податоци на апликацијата и многу поедноставно работење
+со истата.
+Секоја  python класа  со сабкласа <tt class="docutils literal"><span class="pre">django.db.models.Model</span></tt> претставува модел.
+Секој модел најчесто репрезентира една табела во базата на податоци, а секое од
+полињата дефинирани во моделот соодветна колона во табелата.
+Останатите атрибути на класата ги додефинираат останатите однесувања на
+податоците од табелата. Сето ова погоре напишано во код би изгледало вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">app_label</span> <span class="o">=</span> <span class="s">&#39;app&#39;</span>
+
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">u&#39;{0} {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Со креиање на класа <tt class="docutils literal"><span class="pre">Person</span></tt> со сабкласа  <tt class="docutils literal"><span class="pre">models.Model</span></tt> ние креиравме
+django модел со име <tt class="docutils literal"><span class="pre">Person</span></tt> кои што репрезентира соодветна табела во базата
+на податоци. Во <tt class="docutils literal"><span class="pre">Meta</span></tt> класата ги дополнуваме дополнителните атрибути како
+име на апликација на која припаѓа овој модел во нашиот случај app после тоа
+исто така овдека може да дополниме сортирање на податоци, полиња кои што мора да
+бидат различни итн. Подетално објаснување за Meta класата може да најдете
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/db/models/#meta-options">овде</a>.</p>
+<p>Во Вториот дел од класата имаме дефинирано неколку полиња кои што го
+дообјаснуваат името на класата Person, негово име и презиме и датум на раѓање,
+овие полиња се дефинирани со соодветен тип на податоци кои што можат да го
+содржат во првите два случаеви тоа е текст податок со максимална должина од
+100 арактери, додека во вториот податокот мора да биде датум и притоа во
+овој случај е дефинирано дека ова поле не е задолжително односно може да
+поприма и null вредност. За подетално објаснување следете го
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/db/models/#fields">линкот</a>.</p>
+<p>Последниот дел од овој модел е <tt class="docutils literal"><span class="pre">__unicode__</span></tt> методот. Овој метод всушност
+дава дескриптивно прикажување на секој објект од овој модел така доколку во
+командна линија направиме пребарување за сите Person родени пред 2012 како
+резултат ќе ги добиеме објектите репрезентирани со нивното име и презиме.
+Подетално објаснување може да најдете на следниов
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/ref/models/instances/#django.db.models.Model.__unicode__">линк</a>.</p>
+<p>Откако ќе бидат напишани моделите потребно е да се направи синхронизација на
+база со што ќе бидат искреирани табели за сите новои модели.
+Да напоменам дека доколку структурата на самиот проект е како во нашот случај
+односно со пакети кои содржат соодветни модули потребно е секој модел да биде
+импортуван во <tt class="docutils literal"><span class="pre">init</span></tt> модулот на  соодветниот пакет.</p>
+</div>
+<div class="section" id="socialnet">
+<h2>Модели во SocialNet<a class="headerlink" href="#socialnet" title="Permalink to this headline">¶</a></h2>
+<p>Да преминеме сега на креирање на моделите во нашата апликација.
+Истата како што спомнавме претходно треба да биде организирана во 4 модели
+така што како пример ќе искреираме еден од нив сега а останатите ќе бидат како
+задача да ги направите сами.</p>
+<p>Најпрвин потребно е да искреираме нов модул contact  во кој што ќе го сместиме
+овој модел.
+Person  е моделот кои што како пример ќе биде искреиран овој модел е
+карактеристичен и поради тоа што истито наследнува од веќе постоечки модел
+односно од User моделот кои што  го има во django и се користи за аутентикација
+на корисниците. За овој модел потребно е да прочитате
+<a class="reference external" href="https://docs.djangoproject.com/en/dev/topics/auth/default/#user-objects">подетално</a></p>
+<p>Person моделот репрезентиран со код изгледа вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="n">NA</span><span class="p">,</span> <span class="n">MALE</span><span class="p">,</span> <span class="n">FEMALE</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">GENDERS</span> <span class="o">=</span> <span class="p">((</span><span class="n">NA</span><span class="p">,</span> <span class="s">&#39;Not Available&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">MALE</span><span class="p">,</span> <span class="s">&#39;Male&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">FEMALE</span><span class="p">,</span> <span class="s">&#39;Female&#39;</span><span class="p">))</span>
+<span class="n">GENDERS_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;NA&#39;</span><span class="p">:</span> <span class="n">NA</span><span class="p">,</span> <span class="s">&#39;MALE&#39;</span><span class="p">:</span> <span class="n">MALE</span><span class="p">,</span> <span class="s">&#39;FEMALE&#39;</span><span class="p">:</span> <span class="n">FEMALE</span><span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Person</span><span class="p">(</span><span class="n">User</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">app_label</span> <span class="o">=</span> <span class="s">&#39;app&#39;</span>
+
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">GENDERS</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">NA</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">phone</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">u&#39;{0} {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Овој модел ги содржи сите полиња од <tt class="docutils literal"><span class="pre">User</span></tt> моделот плус дополнетите во истиот
+како што се <tt class="docutils literal"><span class="pre">gender,</span> <span class="pre">description,</span> <span class="pre">phone,</span> <span class="pre">birthday</span></tt>.
+Од овие полиња ке се задржам само на кратко на <tt class="docutils literal"><span class="pre">gender</span></tt> кој што преставува
+поле од тип <tt class="docutils literal"><span class="pre">int</span></tt> со специфичен параметар <tt class="docutils literal"><span class="pre">choices</span></tt> што би значело дека може
+да поприма вредност само од понудените во <tt class="docutils literal"><span class="pre">GENDERS</span></tt>. Подетално за оваа
+можност следете го
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/ref/models/fields/#choices">линкот</a></p>
+<p>Вториот модел во оваа апликација има за цел да овозможи поврзување на
+корисниците помеѓу себе како пријатели. Со тоа што откако иницијаторот на ова
+пријателство ќе прати понуда вторито корисник мора да ја одобри истата.
+Значи овој модел мора да содржи полиња за два корисници, видот на релација кои
+го имаа тие(Пријатели, Роднини итн.) и дали таа релација помеѓу нив е активна.
+Сето тоа репрезентирано со код изгледа вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">FRIEND</span><span class="p">,</span> <span class="n">COUPLE</span><span class="p">,</span> <span class="n">CLASSMATE</span><span class="p">,</span> <span class="n">ROOMMATE</span><span class="p">,</span> <span class="n">FAMILY</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">RELATIONS</span> <span class="o">=</span> <span class="p">((</span><span class="n">FRIEND</span><span class="p">,</span> <span class="s">&#39;Friend&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">COUPLE</span><span class="p">,</span> <span class="s">&#39;Couple&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">CLASSMATE</span><span class="p">,</span> <span class="s">&#39;Classmate&#39;</span><span class="p">),</span>
+             <span class="p">(</span><span class="n">ROOMMATE</span><span class="p">,</span> <span class="s">&#39;Roommate&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">FAMILY</span><span class="p">,</span> <span class="s">&#39;Family&#39;</span><span class="p">))</span>
+
+<span class="n">RELATIONS_MAP</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;FRIEND&#39;</span><span class="p">:</span> <span class="n">FRIEND</span><span class="p">,</span> <span class="s">&#39;COUPLE&#39;</span><span class="p">:</span> <span class="n">COUPLE</span><span class="p">,</span> <span class="s">&#39;CLASSMATE&#39;</span><span class="p">:</span> <span class="n">CLASSMATE</span><span class="p">,</span>
+                 <span class="s">&#39;ROOMMATE&#39;</span><span class="p">:</span> <span class="n">ROOMMATE</span><span class="p">,</span> <span class="s">&#39;FAMILY&#39;</span><span class="p">:</span> <span class="n">FAMILY</span><span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ContactRelation</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">app_label</span> <span class="o">=</span> <span class="s">&#39;app&#39;</span>
+
+    <span class="n">updated</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="n">first_contact</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Person</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;first_contact_rel&#39;</span><span class="p">)</span>
+    <span class="n">second_contact</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">Person</span><span class="p">,</span>
+                                       <span class="n">related_name</span><span class="o">=</span><span class="s">&#39;second_contact_rel&#39;</span><span class="p">)</span>
+    <span class="n">relation</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="n">RELATIONS</span><span class="p">)</span>
+
+    <span class="n">accepted</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">BooleanField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__unicode__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">u&#39;{0} is {1} with {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first_contact</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">second_contact</span><span class="p">,</span>
+                                            <span class="bp">self</span><span class="o">.</span><span class="n">get_relation_display</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Како што претходно рековме потребни ни се две релации во овој модел со два
+корисника  ова репрезентирано во код изгледа како во горниот пример а неговото
+значење е дека имаме релација со моделот <tt class="docutils literal"><span class="pre">Person</span></tt> и тоа секоја
+<tt class="docutils literal"><span class="pre">ContactRelation</span></tt> може да има само еден <tt class="docutils literal"><span class="pre">first_contact</span></tt> додека секој
+<tt class="docutils literal"><span class="pre">person</span></tt> може да биде <tt class="docutils literal"><span class="pre">first_contact</span></tt> во повеќе <tt class="docutils literal"><span class="pre">ContactRelation</span></tt>.</p>
+<dl class="docutils">
+<dt>Постојат неколку типови на релации помеѓу моделите и тоа:</dt>
+<dd><ul class="first last simple">
+<li>OneToOne</li>
+<li>ManyToOne(ForeignKey)</li>
+<li>ManyToMany</li>
+</ul>
+</dd>
+</dl>
+<p>Подетално за овие релации може да прочитате
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/db/models/#relationships">овде</a></p>
+<p>Откако имаме корисници и релација помеѓу нив ваша задача ќе биде да направите
+модеи кои што ќе им овозможат на корисниците да направат одреденa активност на
+нивната страна односно да напшаат одредено мислење кое што подоцна останатите
+корисници можат да го ископираат на нивниот профил или пак да остават коментар
+за истот. Што значи ни требаат два дополнителни модели :</p>
+<p>Activity со следниве карактеристики:
+* Датум кога е направена оваа активност
+* Од кого е креиран оваа активност
+* Содржина на активноста
+* број на копии од страна на останатите корисници
+* дали оваа активност можат да ја гледаат сите корисници или само неговите пријатели</p>
+<p>За да овозможиме коментари на активноста потребно е да се искреира дополнителен
+модел <tt class="docutils literal"><span class="pre">Comment</span></tt> кои што би го карактеризирале следниве карактеристики:
+* Датум кога е напишан коментарот
+* За која активност се однесува коментарот
+* Кој го напишал</p>
+<p>Но претходно пред да започнете со креирање на овие модели истите потребно е да
+ги сместите во нов модул <tt class="docutils literal"><span class="pre">activity</span></tt>.</p>
+</div>
+<div class="section" id="id12">
+<h2>Интеракција со податоци во Django<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>Откако ги искреиравме моделите и веќе ги имаме сите потребни табели во база,
+потребно е податоците примени од клиент стратата да бидат снимани во
+соодветните табели, истите да бидат едитирани или можеби избришани.
+Исто така клиентот потребно е да прикаже одреден дел од податоците надворешно.
+Целата оваа интеракција со податоците django ја овозможува преку сопствено
+<tt class="docutils literal"><span class="pre">database-abstraction</span> <span class="pre">API</span></tt>. Ова API ви ги овозможува сите претходно спомнати
+потребни акции за секоја од нив ќе дадеме краток пример во продолжение.</p>
+<p>Доколку е потребно да се искреира нов објек од <tt class="docutils literal"><span class="pre">Person</span></tt> моделот
+репрезентирано во код тоа изгледа вака:</p>
+<div class="highlight-python"><pre>person = Person(first_name='Test', last_name='Person',
+                 birthday=''2002-08-25)
+person.save()</pre>
+</div>
+<p>Со ова веќе имаме искреирано нов објект од моделот <tt class="docutils literal"><span class="pre">Person</span></tt> и истиот е зачуван
+во соодветна табела. Доколку е потребно сега да се промени неговото име
+тоа би изгледало вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">person</span><span class="o">.</span><span class="n">first_name</span> <span class="o">=</span> <span class="s">&#39;New&#39;</span>
+<span class="n">person</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">update_fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;first_name&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Со оваа промена во база се промени само <tt class="docutils literal"><span class="pre">first_name</span></tt> полето и сега овој
+<tt class="docutils literal"><span class="pre">person</span></tt> е со име New.</p>
+<p>Доколку по некое време потребно е да се избрише овој објект тоа се прави на
+следниов начин:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">person</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Голем е бројот на случаеви кога е потребно да се извлече одредена информација
+од база и да се прикаже на клиентска страна. Django тоа го овозможува на доста
+едноставен начин иако сепак зависи од тоа колку е сложен самиот филтер за
+информацијата што треба да се земе. Така на пример доколку сакаме да ги
+прикажеме сите person објекти  со име <tt class="docutils literal"><span class="pre">Alex</span></tt> тоа би изгледало вака:</p>
+<div class="highlight-python"><pre>alex_persons = Person.objects.filter(first_name='Alex'))</pre>
+</div>
+<p>Доколку пак сакаме да ги изоставиме сите што имаат презиме <tt class="docutils literal"><span class="pre">Deanovski</span></tt> го
+пишуваме следново пребарување:</p>
+<div class="highlight-python"><pre>persons_without_deanovski = Person.objects.exclude(last_name='Deanovski'))</pre>
+</div>
+<p>Ова се само неколку примери но Django овозможува многу посложени пребарувања
+за да дознаете многу повеќе за нив следат неколку линкови што потребно е да ги
+разгледате детално:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/db/queries/">https://docs.djangoproject.com/en/1.5/topics/db/queries/</a></li>
+<li><a class="reference external" href="https://docs.djangoproject.com/en/1.5/ref/models/querysets/">https://docs.djangoproject.com/en/1.5/ref/models/querysets/</a></li>
+<li><a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/db/aggregation/">https://docs.djangoproject.com/en/1.5/topics/db/aggregation/</a></li>
+</ul>
+<p>Исто така да напоменам дека доколку природата на пребарувањето е толку сложена
+што Ова Django API  не може да го направи потребното пребарување, може да се
+искористат дирекни пребарувања во база со SQL пребарување,
+поопширно за ова може да најдете <a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/db/sql/">овде</a>.</p>
+</div>
+<div class="section" id="id14">
+<h2>Креирање на  методи во SocialNet<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>За да продолжиме со оваа целина потребно е претходната задача за креирање на
+двата дополнителни модели да биде завршена. Ја објаснивме накратко интеракцијата
+помеѓу Django и базата на податоци. Сега потребно е да го примениме сето тоа
+во нашиот проект.</p>
+<p>Секој корисник може да си креира свој профил и притоа истиот да го едитира,
+во случај да не сака неговиот профил да биде повеќе активен потребно е да има
+опција да направи деактивирање на истиот. За сето ова да му биде овозможено на
+корисникот потребно е да направиме неколку методи во Person моделот и тоа:
+- Метод за креирање на нов корисник
+- Метод за едитирање на податоците
+- Метод за деактивирање на профилот</p>
+<p>Да започнеме по ред. Го објаснивме начинот за додавање на нов објект во самата
+база на податоци со помош на django меѓутоа многу често имаме потреба да
+провериме дали некои услов е задоволен пред да се искреира објектот затоа
+потребно е да креираме свои метод во моделот Person кој што освен што ќе го
+искреира новиот објект, ќе ги направи и сите дополнителни проверки и средување
+на податоците во формат каков што е потребен за истите да се снимаат во база.</p>
+<p>Методот за креирање на нов корисник односно инстанца од моделот
+Person изгледа вака:</p>
+<div class="highlight-python"><pre>@staticmethod
+ def create_person(first_name, last_name, username, password, email,
+                   gender=None, description='', phone=None, birthday=None):
+
+     if not gender:
+         gender = 'NA'
+
+     person = Person(first_name=first_name, last_name=last_name,
+                     username=username, email=email,
+                     gender=GENDERS_MAP[gender], description=description,
+                     phone=phone, birthday=birthday)
+     person.set_password(password)
+
+     person.save()
+
+     return person</pre>
+</div>
+<p>Методите кои што не се поврзани со конкретна инстанца од моделот мора да бидат
+статични методи, тоа се прави со додавање декоратор на методот <tt class="docutils literal"><span class="pre">staticmethod</span></tt>.
+На овој начин методот се повикува преку моделот Person, за разлика од другите
+методи што се повикуваат преку инстанца од моделот Person.
+Дополнителни работи што е потребно да направиме во овој метод се на <tt class="docutils literal"><span class="pre">gender</span></tt>
+променливата да и доделиме default вредност доколку истата не е проследен и
+лозинката на корисникот најпрвин мора да биде <tt class="docutils literal"><span class="pre">hashed</span></tt> пред да се зачува во база.
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/auth/passwords/">Повеќе</a>
+информации за тоа како django како ги зачувува лозинките во база и
+целосната негова интеракција со истите.</p>
+<p>Откако овој метод е креиран и веќе креираните тестови се успешни преминуваме на
+креирање на нов метод за промена на профил на корисник. Во овој метод
+клиентската страна потребно е да ги прати до серверот само полињата што се
+променети на тој начин правиме update само на тие полиња во база нема потреба
+да се прави непотребен update на полињата што ја имаат истата вредност.
+Во продолжение е даден методот:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">update_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+     <span class="n">update_fields</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+     <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">update_fields</span><span class="p">:</span>
+         <span class="n">field_value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">field</span><span class="p">]</span>
+
+         <span class="k">if</span> <span class="n">field</span> <span class="o">==</span> <span class="s">&#39;gender&#39;</span><span class="p">:</span>
+             <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">GENDERS_MAP</span><span class="p">[</span><span class="n">field_value</span><span class="p">]</span>
+
+         <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">field_value</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">update_fields</span><span class="o">=</span><span class="n">update_fields</span><span class="p">)</span>
+
+     <span class="k">return</span>
+</pre></div>
+</div>
+<p>Со овој метод правиме update на секое поле што корисникот го променил со тоа што
+во еден <tt class="docutils literal"><span class="pre">for</span></tt> циклус поминуваме низ сите полиња пратени од клиентска страна
+и на секое од нив им ја доделуваме новата вредност за на крај да ја зачуваме промената.
+Потребно е за податоците кои што не се во соодветниот формат каков што ги
+очекува базата истите да се форматираат поради тоа треба да внимаваме кога го
+едитираме полето <tt class="docutils literal"><span class="pre">gender</span></tt>. На крај доколку е потребно да вратиме вредност на
+клиентот ја враќаме истата во dict формат доколку не единствено излегуваме
+со return.</p>
+<p>Промената на лозинка е специфична ситуација која што потребно е да ја обработиме
+во посебен метод кој што изгледа вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">reset_password</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">old_password</span><span class="p">,</span> <span class="n">new_password</span><span class="p">):</span>
+     <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">         Only user could reset the password with</span>
+<span class="sd">         inserting old and new password</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">old_password</span><span class="p">):</span>
+         <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&#39;Old password does not match.&#39;</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">set_password</span><span class="p">(</span><span class="n">new_password</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">update_fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;password&#39;</span><span class="p">])</span>
+
+     <span class="k">return</span>
+</pre></div>
+</div>
+<p>Пред да ја промени корисникот својата лозинка потребно е заради безбедносни
+причини да ја провериме неговата стара лозинка. Ако овој услов е успшен новата
+лозинка ја зачувуваме во база. Повторно ги проверуваме претходно креираните
+тестови за оваа целина доколку се е во ред се префралуваме на наредниот метод.</p>
+<p>Наредниот метод се однесува на деактивирање на веќе активен корисник.
+Се што треба да направиме во овој случај е да го промениме полето <tt class="docutils literal"><span class="pre">is_active</span></tt>
+од <cite>True</cite> во <cite>False</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">remove_person</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+     <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">         Person will not be remove permanently from the system,</span>
+<span class="sd">         only is_active flag will be set to False</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span> <span class="o">=</span> <span class="bp">False</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">update_fields</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;is_active&#39;</span><span class="p">,</span> <span class="p">])</span>
+
+     <span class="k">return</span>
+</pre></div>
+</div>
+<p>Проверуваме тестови и продолжуваме понатаму.</p>
+<p>Откако сите методи за овој модел ни се готови преминуваме со креирање на
+методите кои што се потребни во моделот <tt class="docutils literal"><span class="pre">ContactRelation</span></tt>.
+Методите во овој модел потребно е да овозможат креирање на нова релација помеѓу
+два корисника, едитирање на таа релација и бришење на истата.
+Во продолжение ќе го објасниме методот за креирање на нова релација помеѓу два
+корисника додека останатите ќе биде потребно да ги направите сами:</p>
+<div class="highlight-python"><pre>@staticmethod
+ def add_relation(user, second_contact_id, relation):
+
+     if ContactRelation.objects.filter(
+                         Q(first_contact__pk=user.pk,
+                         second_contact__pk=second_contact_id) |
+                         Q(first_contact__pk=second_contact_id,
+                         second_contact__pk=user.pk)).count() &gt; 0:
+         raise Exception("This two contacts have been already in relation.")
+
+     first_contact = user
+     second_contact = Person.objects.get(pk=second_contact_id)
+
+     rel = ContactRelation(first_contact=first_contact,
+                           second_contact=second_contact,
+                           relation=RELATIONS_MAP[relation])
+     rel.save()
+
+     return rel</pre>
+</div>
+<p>Потребно е најпрвин да провериме дали овие два корисници веќе не се поврзани
+помеѓу себе. Доколку не се можеме да ја креираме истата, но претходно потребно
+е да го земеме од база како објект вториот корисник со кои што моментално
+логираниот корисник сака да воспостави релација. Секогаш релациските полиња во
+Django моделите како влезен аргумент бараат објект од ист тип како и релацијата.
+Откако е искреирана новата релација потребно овој објект да биде повратна
+вредност од овој метод.</p>
+<p>Како што спомнав претходно како задача потребно е да бидат искреирани останатите
+неколку методи за <tt class="docutils literal"><span class="pre">ContactRelation</span></tt> моделот и методите за преостанатите
+два модела со тоа што да не заборавиме дека за секој од нив потребно е најпрвин
+да бидат креирани тестови.</p>
+</div>
+<div class="section" id="django-unit-tests">
+<h2>Django Unit Tests<a class="headerlink" href="#django-unit-tests" title="Permalink to this headline">¶</a></h2>
+<p>Како што спомнавме веќе многу важен дел денес од развивањето на една WEB
+апликација се нејзините тестови. Django  го користи истиот python модул што
+претходно го објаснуваме <tt class="docutils literal"><span class="pre">unittest</span></tt>, што значи основите за тестирање во
+python веќе ни се познати и не би сакал повторно да се задржувам на нив.
+За извржување на тестовите во django од командна линија ја извршуваме следната команда:</p>
+<div class="highlight-python"><pre>django-admin.py test</pre>
+</div>
+<p>При што се извршуваат сите тестови во проектот доколку сакаме да истестираме
+само одредена апликација во продолжение го додаваме нејзиното име или можеби
+сакаме одреден модул тоа може да се направи со име на апликацијата точка името
+на тест класата од модулот:</p>
+<div class="highlight-python"><pre>django-admin.py test app.TestContact</pre>
+</div>
+<p>Django бара тестови во два модула од апликацијата и тоа модул со име
+<tt class="docutils literal"><span class="pre">models</span></tt> и модул со име <tt class="docutils literal"><span class="pre">tests</span></tt>.</p>
+<p>Убава пракса е сите тестови да бидат организирани во еден пакет со име <tt class="docutils literal"><span class="pre">tests</span></tt>
+кој што се состои од модули со групи на тестови организациски поделени според
+одредена целина во апликацијата. Како на пример сите тестови за <tt class="docutils literal"><span class="pre">Contact</span></tt>
+моулот ги чуваме во модул со име <tt class="docutils literal"><span class="pre">contact</span></tt> итн. За да бидат пронајдени овие
+тестови од страна на django името на тест класата за специфичниот модул мора да
+бидат импортувани во <tt class="docutils literal"><span class="pre">init</span></tt> модулот на <tt class="docutils literal"><span class="pre">tests</span></tt> пакетот.
+Сите преостанати детали околу <tt class="docutils literal"><span class="pre">django</span> <span class="pre">unit</span> <span class="pre">tests</span></tt> може да ги прочитате во
+неговата <a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/testing/overview/#module-django.test">документација</a></p>
+</div>
+<div class="section" id="unit-tests-socialnet">
+<h2>Unit Tests во SocialNet<a class="headerlink" href="#unit-tests-socialnet" title="Permalink to this headline">¶</a></h2>
+<p>Во продолжение практично ќе покажеме како се пишуваат тестови во django и како
+истите се извршуваат. Пред да започнеме со пишување на секој модел во
+апликацијата потребно е најпрвин да ги напишеме соодветните тестови за истиот,
+врз основа на кои подоцна ќе го напишеме и самиот метод. За очекување е
+напишаните тестови на почетокот како што рековме и претходно да бидат погрешни.
+Конкретен пример ќе разработиме за моделот за креирање на нов корисник во системот.
+Ги Знаеме параметрите кои што ни се потребни да креираме нов корисник во системот,
+врз основа на нив го пишуваме тестот:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TestContact</span><span class="p">(</span><span class="n">ResourceTestCase</span><span class="p">):</span>
+ <span class="n">fixtures</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;auth.json&#39;</span><span class="p">,</span> <span class="s">&#39;person.json&#39;</span><span class="p">]</span>
+
+ <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="nb">super</span><span class="p">(</span><span class="n">TestContact</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setUp</span><span class="p">()</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">api_c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_client</span>
+
+     <span class="c"># Login client</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">api_c</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">&#39;admin&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s">&#39;12345&#39;</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">person_data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="s">&#39;Test&#39;</span><span class="p">,</span>
+                             <span class="n">last_name</span><span class="o">=</span><span class="s">&#39;Person&#39;</span><span class="p">,</span>
+                             <span class="n">username</span><span class="o">=</span><span class="s">&#39;test.person&#39;</span><span class="p">,</span>
+                             <span class="n">password</span><span class="o">=</span><span class="s">&#39;12345&#39;</span><span class="p">,</span>
+                             <span class="n">email</span><span class="o">=</span><span class="s">&#39;test@mail.com&#39;</span><span class="p">,</span>
+                             <span class="n">description</span><span class="o">=</span><span class="s">&#39;Test description&#39;</span><span class="p">,</span>
+                             <span class="n">phone</span><span class="o">=</span><span class="s">&#39;+2165125498425&#39;</span><span class="p">,</span>
+                             <span class="n">birthday</span><span class="o">=</span><span class="s">&#39;1989-12-01&#39;</span><span class="p">,</span>
+                             <span class="n">gender</span><span class="o">=</span><span class="s">&#39;MALE&#39;</span>
+                             <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_create_person_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">first_name</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span>
+        <span class="n">last_name</span> <span class="o">=</span> <span class="s">&#39;Person&#39;</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="s">&#39;test.person&#39;</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="s">&#39;12345&#39;</span>
+        <span class="n">email</span> <span class="o">=</span> <span class="s">&#39;test@mail.com&#39;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s">&#39;Test description&#39;</span>
+        <span class="n">phone</span> <span class="o">=</span> <span class="s">&#39;+2165125498425&#39;</span>
+        <span class="n">birthday</span> <span class="o">=</span> <span class="s">&#39;1989-12-01&#39;</span>
+        <span class="n">gender</span> <span class="o">=</span> <span class="s">&#39;MALE&#39;</span>
+
+        <span class="n">new_person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">create_person</span><span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span>
+                                          <span class="n">password</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span>
+                                          <span class="n">phone</span><span class="p">,</span> <span class="n">birthday</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">new_person</span><span class="p">,</span> <span class="n">Person</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">new_person</span><span class="o">.</span><span class="n">pk</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Доколку го имате прочитано веќе погоре дадениот линк со детали околу django
+тестовите јасно ви е дека првиот дел од кодов претставува дефинирање на самата тест класа.
+<tt class="docutils literal"><span class="pre">Fixtures</span></tt> претставуваат податоци во <tt class="docutils literal"><span class="pre">json</span></tt> формат со кои што може да
+работиме во текот на тестирањето а кои што реално пополнуваат одредени објекти.
+Пред извршување на секој тест django го повикува <tt class="docutils literal"><span class="pre">setUp()</span></tt> методот.
+Во овој метод дефинираме променливи, објекти или извршуваме методи кои што ни
+се потребни во најголем дел од тестовите. Како пример ќе го земам методот за
+логирање на корисник овој метод ни е потребен во најголем дел од нашите тестови,
+поради тоа за да не го повикуваме во секој тест посебно едноставно со повикување
+во <tt class="docutils literal"><span class="pre">setUp()</span></tt> методот тој се извршува за секој тест посебно.</p>
+<p>Вториот дел од код-от на дадениот пример претставува метод чие што име започнува
+со <tt class="docutils literal"><span class="pre">test</span></tt>, а веќе спомнавме дека секој метод во Тест класата што започнува со
+<tt class="docutils literal"><span class="pre">test</span></tt> python односно django го препознаваат како тест. Во нашиов случај
+сакаме да провериме дали со дадените податоци ќе се искреира нов објект од
+моделот Person и дали истиот е снимен во база. Бидејќи веќе во <tt class="docutils literal"><span class="pre">fixtures</span></tt>
+имаме еден објект од моделот Person кој што е со <tt class="docutils literal"><span class="pre">id=1</span></tt> наредниот реално е да
+очекуваме да биде со <tt class="docutils literal"><span class="pre">id=2</span></tt>. На истиот начин ги креираме тестовите и за сите
+останати методи што ни се потребни за добивање на посакуваната функционалност
+на Person моделот.</p>
+<p>Ова беше пример за дирекно тестирање на еден метод од одреден модел.
+Но исто така многу често потребно е да ја истестираме целосната интеракција
+помеѓу клиентот и серверот, симулирајќи соодветен клиент – сервер request,
+веднаш после нареднава целина ќе се вратиме  на тестовите обработувајќи
+ја оваа проблематика.</p>
+</div>
+<div class="section" id="django-forms">
+<h2>Django Forms<a class="headerlink" href="#django-forms" title="Permalink to this headline">¶</a></h2>
+<p>При праќање на податоците од клиентска страна на сервер истите мора да се проверат
+односно да подлежат на валидација пред серверот да ги обработи. Во Django за
+сето ова е развиен библотека која што ги валидира податоците, враќа листа на
+грешки доколку некој од нив не е соодветен односно валидацијата е успешна
+враќа податоци конвертирани во типот на променлива која што претходно ја имаме
+дефинирано за тоа поле. На тој начин во модел методите добиваме податоци кои што
+одговараат соодветно на типот на секој од полињата во методот.
+<tt class="docutils literal"><span class="pre">Forms</span></tt> библотеката има и останати примени но овде ќе се задржиме само на оваа.
+<a class="reference external" href="https://docs.djangoproject.com/en/1.5/topics/forms/">Попширно</a> за истата може
+да прочитате од django документацијта.</p>
+<p>Во продолжение ќе погледнеме пример за валидациска форма на методот за
+креирање на нов објект од моделот Person:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreateNewPersonForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+   <span class="n">first_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+   <span class="n">last_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+   <span class="n">birthday</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Секоја форма претставува python класа која што наследува од <tt class="docutils literal"><span class="pre">forms.Form</span></tt> класата
+и во себе содржи инстанци од класи кои што дефинираат различни податочни типови.
+Односно тие го претставуваат секој еден податок кој што  е потребно да го
+примиме како влезен аргумент од клиентска страна.
+Така на пример доколку сакаме да креираме нов објект од моделот Person и ни се
+потребни параметрите <tt class="docutils literal"><span class="pre">first_name</span></tt>, <tt class="docutils literal"><span class="pre">last_name</span></tt> кои што треба да бидат текст
+со максимална должина 100 карактери и истите се задолжителни полиња додека
+датумот на раѓање потребно е да биде во datetime формат и истиот не е задолжителен.
+Сето ова напишано преку Django Form е прикажано на горниов пример.</p>
+</div>
+<div class="section" id="forms-socialnet">
+<h2>Forms во SocialNet<a class="headerlink" href="#forms-socialnet" title="Permalink to this headline">¶</a></h2>
+<p>Во продолжение ќе дадеме пример на неколку форми од SocialNet додека остантите
+ќе биде потребно сами да ги искреирате. Откако е готов метод за креирање на
+нов корисник во системот потребно е да креираме валидациска форма за податоците
+кои што му се потребни на моделот. Да напоменам дека имињата на параметрите во
+формата потребно е да бидат исти со оние во моделот. Формата за креирање нов
+корисник во системот изгледа како на следниов пример:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">validateGender</span><span class="p">(</span><span class="n">gender</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validate that gender is one of the allowed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">gender</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">gender</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">gender</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GENDERS_MAP</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="s">u&#39;Invalid gender </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">gender</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">CreateNewPersonForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">()</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">phone</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validateGender</span><span class="p">],</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Карактеристично за оваа форма што досега го немаме спомнато е дека при
+дефинирањето на одредено поле може за истото да напишеме и дополнителна валидација
+како на пример за <tt class="docutils literal"><span class="pre">gender</span></tt> потребно е како податоци да примаме само
+<tt class="docutils literal"><span class="pre">'NA',</span>&nbsp; <span class="pre">'MALE',</span>&nbsp; <span class="pre">'FEMALE'</span></tt>, поради тоа ја пишуваме валидацијата <tt class="docutils literal"><span class="pre">validateGender</span></tt>
+и истата ја дефинираме во полето со дефинирање на дополнителен валидатор.
+Може да има повеќе од еден валидатор за едно поле.</p>
+<p>Втора Форма која што ни е потребна во апликацијата е онаа за едитирање на
+податоците на корисникот, која што изгледа вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UpdatePersonForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">last_name</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">EmailField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">phone</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">birthday</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">validateGender</span><span class="p">],</span> <span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Оваа форма ги содржи истите полиња за валидација како и претходната со таа
+разлика што во овој случај сите од полињата се незадолжителни, односно само
+оние кои што се променети само тие ќе бидат испратени од клиентска страна
+за едитирање.</p>
+<p>Последна форма која што ќе ја презентираме овдека е формата за промена на лозинка.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ResetPasswordForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">Form</span><span class="p">):</span>
+    <span class="n">old_password</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">new_password</span> <span class="o">=</span> <span class="n">forms</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">min_length</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Освен максимална должина постои можност да се дефинира и минимална должина на
+карактери за полињата кои што го побаруваат тоа, како на пример лозинк која што
+не смее да биде помала од 5 карактери а ниту поголема од 30 и за да се направи
+промена на истата потребно е корисникот да ја внесе и старата и новата лозинка задолжително.</p>
+<p>Врз основа на документацијата за <tt class="docutils literal"><span class="pre">Django</span> <span class="pre">Forms</span></tt>  и примерите дадени овдека,
+останатите форми од апликацијата потребно е да ги направите сами.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tastypie.html" title="Tastypie"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tdd.html" title="Test Driven Development (TDD)"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

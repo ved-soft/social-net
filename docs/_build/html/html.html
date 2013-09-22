@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>HTML &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="next" title="CSS" href="css.html" />
+    <link rel="prev" title="Краток осврт на проектот" href="intro.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="css.html" title="CSS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Краток осврт на проектот"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">HTML</a><ul>
+<li><a class="reference internal" href="#id2">Што е HTML?</a></li>
+<li><a class="reference internal" href="#id5">Тагови и елементи</a></li>
+<li><a class="reference internal" href="#body">Body</a></li>
+<li><a class="reference internal" href="#div">Div</a></li>
+<li><a class="reference internal" href="#id7">Атрибути</a></li>
+<li><a class="reference internal" href="#id8">Наслови</a></li>
+<li><a class="reference internal" href="#id9">Параграфи</a></li>
+<li><a class="reference internal" href="#id10">Линкови</a></li>
+<li><a class="reference internal" href="#id11">Слики</a></li>
+<li><a class="reference internal" href="#id12">Хоризонтална линија</a></li>
+<li><a class="reference internal" href="#id14">Коментари</a></li>
+<li><a class="reference internal" href="#id15">Нов ред</a></li>
+<li><a class="reference internal" href="#id16">Основно форматирање</a></li>
+<li><a class="reference internal" href="#id17">Хиперлинкови</a></li>
+<li><a class="reference internal" href="#id18">Наслов</a></li>
+<li><a class="reference internal" href="#id19">Табели</a></li>
+<li><a class="reference internal" href="#id20">Листи</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">Краток осврт на проектот</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="css.html"
+                        title="next chapter">CSS</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/html.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="html">
+<span id="id1"></span><h1>HTML<a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>Што е HTML?<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Кратенката <cite>HTML</cite> значи <cite>Hyper Text Markup Language</cite>. Тоа е јазик со кој се
+креирани сите веб страни. Повеќе за истиот може да дознаете на следниов
+<a class="reference external" href="http://www.w3.org/wiki/HTML/Training/What_is_HTML">линк</a>.
+Се во HTML документот е дефинирано со таг.
+Ова  <tt class="docutils literal"><span class="pre">&lt;html&gt;</span> <span class="pre">tag</span></tt> е основен таг кој дефинира HTML документ. Синтакса:</p>
+<div class="highlight-python"><pre>&lt;html&gt;
+  Остатокот на вашата веб страна се содржи помеѓу овие HTML тагови!
+&lt;/html&gt;</pre>
+</div>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html">Повеќе</a></p>
+</div>
+<div class="section" id="id5">
+<h2>Тагови и елементи<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Таговите се зборови-имиња кои ги дефинираат и одделуваат различните делови
+во документот. Тие се составени од клучен збор во аглести загради <tt class="docutils literal"><span class="pre">&lt;&gt;</span></tt>,
+кој скоро секогаш има и завршен таг. Таговите исто така содржат и атрибути.
+Синтакса:</p>
+<div class="highlight-python"><pre>&lt;tag attribute='value'&gt;содржина&lt;/tag keyword&gt;</pre>
+</div>
+</div>
+<div class="section" id="body">
+<h2>Body<a class="headerlink" href="#body" title="Permalink to this headline">¶</a></h2>
+<p>Во &lt;body&gt; тагот се наоѓа целата содржина на веб страните.
+Тоа доаѓа после &lt;head&gt; тагот. Пример:</p>
+<div class="highlight-python"><pre>&lt;html&gt;
+   &lt;head&gt;
+      &lt;title&gt;Пример!&lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+      Пример!
+   &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body">Повеќе</a></p>
+<p>Скоро целата содржина се наоѓа во &lt;body&gt; тагот. Единствен исклучок се скрипти
+и стил тагови, како и таговите за наслов на страната. Како што можете да видите
+во овој пример има наслов, слика, линк и сите тие се наоѓаат во
+<tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt> тагот. Додека <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> тагот содржи само линкови од надворешни
+документи и наслов на страната. Во продолжение следи пример:</p>
+<div class="highlight-python"><pre>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Моја прва страна&lt;/title&gt;
+    &lt;style rel="stylesheet" type="text/css" href="homepage.css" /&gt;
+    &lt;script type="text/javascript" src="homepage.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Здраво, Ова е слика од мојата мачка!&lt;/h1&gt;
+    &lt;img src="cat.jpg" /&gt;
+    &lt;a href="mailto:cat@codecademy.com"&gt;Email до мојата мачка&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+</div>
+<div class="section" id="div">
+<h2>Div<a class="headerlink" href="#div" title="Permalink to this headline">¶</a></h2>
+<p>Блок елемент за содржина без семантичко значење. Синтакса:</p>
+<div class="highlight-python"><pre>&lt;div&gt;Пример.&lt;/div&gt;</pre>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>Атрибути<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p><em>class</em>
+HTML елементите можат да содржат повеќе од една класа.:</p>
+<div class="highlight-python"><pre>&lt;div class="big-box yellow-box"&gt;Ова е голема жолта кутија.&lt;/div&gt;</pre>
+</div>
+<p><em>id</em>
+Идентификацијата на елементите е ексклузивна, никогаш не се повторува:</p>
+<div class="highlight-python"><pre>&lt;div id="my-box"&gt;Ова е мојата кутија! Ставете го вашиот текст во друга кутија.&lt;/div&gt;</pre>
+</div>
+<p><em>href</em>
+Со овој атрибут се додаваат линкови во веб страната.:</p>
+<div class="highlight-python"><pre>&lt;a href="http://google.com"&gt;Побарај на Google!&lt;/a&gt;</pre>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>Наслови<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>Насловите како <tt class="docutils literal"><span class="pre">&lt;h1&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;h2&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;h3&gt;</span></tt>, ... дозволуваат шест нивоа на
+стилирање, движејки се од најголем до најмал, го делат документот на
+логични сегменти. Синтакса:</p>
+<div class="highlight-python"><pre>&lt;h1&gt; Ова е најголемиот наслов! &lt;/h1&gt;</pre>
+</div>
+</div>
+<div class="section" id="id9">
+<h2>Параграфи<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt> Ова е најчестиот таг во HTML – тој го заокружува текстот во една целина.
+Најчесто има и други елементи кои се вгнездени во него, како што се <tt class="docutils literal"><span class="pre">&lt;img/&gt;</span></tt>,
+<tt class="docutils literal"><span class="pre">&lt;a&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;strong&gt;</span></tt> и <tt class="docutils literal"><span class="pre">&lt;em&gt;</span></tt>.:</p>
+<div class="highlight-python"><pre>&lt;p&gt;Ова е параграф!&lt;/p&gt;</pre>
+</div>
+</div>
+<div class="section" id="id10">
+<h2>Линкови<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>Линковите се користат за да го поврзат документот со одредени извори на
+информации (многу поразлични од хиперлинкови, кои Ве носат на друга веб страна
+откако ќе кликнете на нив). Линковите се појавуваат само во одреден дел на
+документот и не ја менуваат содржината, туку само нивната презентацијата. Пример:</p>
+<div class="highlight-python"><pre>&lt;link type="text/css" rel="stylesheet" href="styles.css" /&gt;</pre>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>Слики<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">&lt;img&gt;</span></tt> тагот е тој кој ги додава сликите во вашиот HTML. Секогаш го содржи
+<tt class="docutils literal"><span class="pre">'src'</span></tt> атрибутот кој му кажува на прелистувачот каде да ја најде таа слика.
+Овој таг стои сам, без завршен таг и може да референцира и локално. Пример:</p>
+<div class="highlight-python"><pre>&lt;img src='mylocalimage.jpg'/&gt;</pre>
+</div>
+</div>
+<div class="section" id="id12">
+<h2>Хоризонтална линија<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>Овој таг креира црна линија која хоризонтално ја двои содржината. Истиот може
+да биде променет/разубавен со различни css стилови.:</p>
+<div class="highlight-python"><pre>Овој текст е одвоен
+&lt;hr&gt;
+...од овој!</pre>
+</div>
+<p>Повеќе за таг може да прочитате на
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr">овде</a>.</p>
+</div>
+<div class="section" id="id14">
+<h2>Коментари<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>HTML коментарите се користат понекогаш во кодирањето за да објаснат
+некој негов дел. Овие коментари не се гледат во веб прeлистувачот.:</p>
+<div class="highlight-python"><pre>&lt;!-- Ова е HTML коментар! --&gt;</pre>
+</div>
+</div>
+<div class="section" id="id15">
+<h2>Нов ред<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<p>Во поголем текст со овој таг ќе додадете нов ред. Ова се користи во ситуации
+каде имаме поголем текст во кој такво форматирање е неопходно, како на пример
+поеми или адреси.:</p>
+<div class="highlight-python"><pre>&lt;p&gt; Малку текст &lt;br/&gt; во две засебни линии. &lt;/p&gt;</pre>
+</div>
+</div>
+<div class="section" id="id16">
+<h2>Основно форматирање<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<p>Секој текст можете многу лесно да го задебелите (bold), искосите (italic),
+или да го подвлечете (underlined) користејки едноставни тагови за форматирање.
+Пример:</p>
+<div class="highlight-python"><pre>Ова е &lt;b&gt;задебелен текст&lt;/b&gt;, &lt;i&gt;накосен&lt;/i&gt;, и &lt;u&gt;подвлечен&lt;/u&gt;.</pre>
+</div>
+</div>
+<div class="section" id="id17">
+<h2>Хиперлинкови<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<p>Хиперлинкови (или само линкови) го носат корисникот до друга страна со кликање
+на истите. Најчесто употребуван атрибут кај линкови е <tt class="docutils literal"><span class="pre">href</span></tt>, кој му ја дава
+адреса на прелистувачот. Пример:</p>
+<div class="highlight-python"><pre>Следниов текст &lt;a href="http://google.com"&gt;оди на страната на Google&lt;/a&gt;.</pre>
+</div>
+</div>
+<div class="section" id="id18">
+<h2>Наслов<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">&lt;title&gt;</span></tt> таг-от му кажува на прелистувачот каков наслов да прикаже за
+вашата страна. Тој се наоѓа во <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> тагот.:</p>
+<div class="highlight-python"><pre>&lt;title&gt; Мој наслов &lt;/title&gt;</pre>
+</div>
+</div>
+<div class="section" id="id19">
+<h2>Табели<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
+<p>Елемент за прикажување на информации во редови и колони. Ги дели информациите
+на редови (назначени со <tt class="docutils literal"><span class="pre">&lt;tr&gt;</span></tt> тагот) кои содржат келии
+(назначени со <tt class="docutils literal"><span class="pre">&lt;td&gt;</span></tt> тагот). Пример:</p>
+<div class="highlight-python"><pre>&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Производ&lt;/th&gt;
+      &lt;th&gt;Цена&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Банана&lt;/td&gt;
+      &lt;td&gt;56.00 ден&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Јогурт&lt;/td&gt;
+      &lt;td&gt;55.00 ден&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Вкупно&lt;/td&gt;
+      &lt;td&gt;101.00 ден&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</pre>
+</div>
+</div>
+<div class="section" id="id20">
+<h2>Листи<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<p>HTML поддржува два типа на листи: подредени и неподредени. Во нив секој
+поединечен елемент си носи свој таг.</p>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul">Неподредени листи</a>
+претставуваат неподредена листа од ставки и истите се назначени со
+точки на самиот почеток.:</p>
+<div class="highlight-python"><pre>Од маркет ми треба:
+
+&lt;ul&gt;
+  &lt;li&gt;Сапун&lt;/li&gt;
+  &lt;li&gt;Кашкавал&lt;/li&gt;
+  &lt;li&gt;Домато сос&lt;/li&gt;
+&lt;/ul&gt;</pre>
+</div>
+<p>Вториот тип на листи се подредени по реден број и се наредкуваат подредени листи
+за нив може да прочитате поопширно на
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li">линкот</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="css.html" title="CSS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Краток осврт на проектот"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

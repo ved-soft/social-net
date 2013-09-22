@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Test Driven Development (TDD) &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="next" title="Django" href="django.html" />
+    <link rel="prev" title="Python" href="python.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="django.html" title="Django"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="python.html"
+                        title="previous chapter">Python</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="django.html"
+                        title="next chapter">Django</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tdd.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="test-driven-development-tdd">
+<span id="tdd"></span><h1>Test Driven Development (TDD)<a class="headerlink" href="#test-driven-development-tdd" title="Permalink to this headline">¶</a></h1>
+<p>TDD  претставува процес на пишување тестови за секоја целина на код.
+Редоследот на тестови и пишување код е во насока да прво се пишуваат тестовите
+за после тоа врз основа на нив да се напише соодветниот код.
+На почетокот тестот е  неуспешен, што и самите би го очекувале за подоцна
+откако ќе се напише потребниот код тестот да биде успешен.
+Тестовите можат да бидат позитивни односно негативни,
+што би значело соодветната акција во тестот не секогаш дава позитивен резултат.
+Препорачано е сите случаи каде што се очекува кодот да  појави
+одредена грешка да се проверат. На тој начин ќе бидеме сигурни дека условот
+што го имаме е вистинскиот.</p>
+<p>Овој процес на пишвање тестови размислувајќи краткорочно би рекле
+дека е губење време, бидејќи во најголем број случаи бројот на линии код за
+тестови е три пати поголем од останатиот код. Но долгорочно гледано овој процес
+е многу важен за една апликација особено доколку истата е пообемна.
+За многу кратко време може да се провери дали апликацијата функционира како што треба,
+доколку НЕ многу полесно може да се лоцира проблемот.
+Во понатамошното надоградување на една апликација и промените кои би се направиле
+во одреден дел од истата со помош на тестовите можеме да се осигураме
+дека не направиле дополнителни проблеми во друг дел од апликацијата.
+TDD ни овозможува  значително подобрување на кавалитетот на код кои што го пишуваме.
+Во продолжение преку пример ќе го објасниме пишувањето на тестови во python.
+Од верзија 2.1 python содржи модул за  <tt class="docutils literal"><span class="pre">unit</span></tt> тестови под името <tt class="docutils literal"><span class="pre">unittest</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">unittest</span>
+
+
+<span class="k">def</span> <span class="nf">Calc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;a have to be grater then b&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+
+<span class="k">class</span> <span class="nc">TestCalculation</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">test_equal_to_ten_faild</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">Calc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_equal_to_ten</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">Calc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_a_not_greater_then_b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="ne">Exception</span><span class="p">,</span> <span class="n">Calc</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">unittest</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Во конкретиниот пример се проверува дали пресметките што ги прави функцијата
+<tt class="docutils literal"><span class="pre">Calc</span></tt> се точни. Најпрвин креираме класа <tt class="docutils literal"><span class="pre">TestCalculation</span></tt> која што
+наследува од <tt class="docutils literal"><span class="pre">unittest.TestCase</span></tt> класата, сите методи во оваа класа
+што започнуваат со <tt class="docutils literal"><span class="pre">test</span></tt> и како влезен параметар го имаат <tt class="docutils literal"><span class="pre">self</span></tt> python ги
+прогласува за тестови.  Пред да ја имплементираме функцијата <tt class="docutils literal"><span class="pre">Calc</span></tt> имаме информација
+дека истата потребано е да пресметува два броја при што првиот не смее да биде поголем
+од вториот. За сето ова да го покриеме  со тестови пишуваме тест кои  што
+очекуваме дека <tt class="docutils literal"><span class="pre">Calc</span></tt> нема да пресмета дека 10 и 5 се 10.
+Потоа нареден тест дека 6 и 4 Навистина се 10 и последниот дека ако
+првата променлива е поголема од втората ќе јави грешка.
+Сите овие тестови ако вака ги извршиме потребно е да добиеме
+два неуспешни тестови:</p>
+<div class="highlight-python"><pre>----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+FAILED (failures=2)</pre>
+</div>
+<p>Првиот тест ќе биде успешен затоа што и <tt class="docutils literal"><span class="pre">None</span></tt> вредноста што ја враќа <tt class="docutils literal"><span class="pre">Calc</span></tt>
+функцијата е различно од 10. После имплементацијата на функцијата доколку истата
+е имплементирана правилно сите три тест мора да бидат успешни:</p>
+<div class="highlight-python"><pre>----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK</pre>
+</div>
+<p>TDD процесот е многу вашен при развивање на софтвер и потребно е да му се обрне
+многу големо внимание. Ова беше само еден пример за да се добие идеа за
+овој процес, за подетално запознавање со истиот во продолжение предлагам да
+се прочитатаат  поглавје 13 и 14 од  &#8216;Dive into Python&#8217;.
+Исто така python има одлична документација во продолжение следи
+<a class="reference external" href="http://docs.python.org/2/library/unittest.html#module-unittest">линк</a> од овој модул.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="django.html" title="Django"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Python &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="next" title="Test Driven Development (TDD)" href="tdd.html" />
+    <link rel="prev" title="Marionette.js" href="marionette.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tdd.html" title="Test Driven Development (TDD)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="marionette.html" title="Marionette.js"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Python</a><ul>
+<li><a class="reference internal" href="#id2">Променливи</a></li>
+<li><a class="reference internal" href="#id4">Операции со променливи</a></li>
+<li><a class="reference internal" href="#id5">Повторувачки циклус и Услови</a></li>
+<li><a class="reference internal" href="#id6">Функции</a></li>
+<li><a class="reference internal" href="#id7">Класи и Објекти</a></li>
+<li><a class="reference internal" href="#id8">Модули</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="marionette.html"
+                        title="previous chapter">Marionette.js</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tdd.html"
+                        title="next chapter">Test Driven Development (TDD)</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/python.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="python">
+<span id="id1"></span><h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<p>Python претставува скриптен динамички програмски јазик со  високо ниво на
+податочна структура и едноставна синтакса.  Сето тоа овој јазик го прави
+идеален за брзо развивање на апликации во многу области.
+Во понатамошната презенација на овој програмски јазик користиме 2.7 верзија.</p>
+<div class="section" id="id2">
+<h2>Променливи<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Како вовед ќе демонстрираме неколку едноставни примери со python.
+Да се обидеме за почеток од командна линија да извршиме доделување на вредност
+на променлива и испишување на истата.</p>
+<p>За разлика од некои други програмски јазици каде што мора претходно
+да го дефинираме типот на променлива во овој случај ја доделуваме
+вредноста на променливата додека самиот јазик детектира од каков тип е истата
+врз основа на вредноста што му е доделена.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s">&#39;My first pythonic code&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span>
+<span class="go">My first pythonic code</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="go">&lt;type &#39;str&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Во горниов пример на променливата <tt class="docutils literal"><span class="pre">a</span></tt> и доделивме <tt class="docutils literal"><span class="pre">string</span></tt> вредност без притоа да
+го дефинираме типот на променлива. Потоа при проверка на типот на променливата
+како резултат добивме дека променливата <tt class="docutils literal"><span class="pre">а</span></tt> поради вредноста што ја имаше добиено
+беше детектирана од тип <tt class="docutils literal"><span class="pre">str</span></tt>.
+Во продолжение следува уште еден пример овој пат со <tt class="docutils literal"><span class="pre">int</span></tt> вредност.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="go">&lt;type &#39;int&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Податочни типови кои што доста често се користат во python се:
+<tt class="docutils literal"><span class="pre">list</span></tt>, <tt class="docutils literal"><span class="pre">dict</span></tt> и <tt class="docutils literal"><span class="pre">tuple</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l</span>
+<span class="go">[1, 2, 3]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;first&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;second&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span>
+<span class="go">{&#39;second&#39;: 2, &#39;first&#39;: 1}</span>
+</pre></div>
+</div>
+<p>За истите поопширно може да прочитате на следниов
+<a class="reference external" href="http://docs.python.org/2/tutorial/datastructures.html">линк</a></p>
+</div>
+<div class="section" id="id4">
+<h2>Операции со променливи<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Овој програмски јазик овозможува најразлични операции во зависност
+од типот на променливата. Така на пример две <tt class="docutils literal"><span class="pre">str</span></tt> променливи што содржат засебни
+реченици можат многу лесно да се спојат во една реченица.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s">&#39;My first pythonic code. &#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="s">&#39;Wow it realy simple but powerful&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span>
+<span class="go">&#39;My first pythonic code. Wow it realy simple but powerful&#39;</span>
+</pre></div>
+</div>
+<p>Доколку сакаме  <cite>Wow</cite> од вториот збор сепак да го нема во финалната реченица истот
+би го направиле на следниот начин:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span>
+<span class="go">&#39;My first pythonic code. it realy simple but powerful&#39;</span>
+</pre></div>
+</div>
+<p>Но реченицата како што изгледа во моментов не е во ред потребно е точката
+да ја замениме со запирка.
+Постојат повеќе начини да го направиме тоа следува еден од нив.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;, &#39;</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">4</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span>
+<span class="go">&#39;My first pythonic code, it realy simple but powerful&#39;</span>
+</pre></div>
+</div>
+<p>Исто така сите основни операции со броеви се возможни во python
+во наредниот пример се демонстрирани истите.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span>
+<span class="go">8</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">-</span> <span class="n">j</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span>
+<span class="go">15</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="o">/</span><span class="n">j</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Повторувачки циклус и Услови<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Многу често при програмирање потребно е да се извршат одредени услови за решавање
+на некој проблем, во python се користат следниве услови <tt class="docutils literal"><span class="pre">if</span>&nbsp; <span class="pre">else</span></tt> или
+<tt class="docutils literal"><span class="pre">if</span> <span class="pre">elif</span> <span class="pre">else</span></tt></p>
+<p>Така доколку потребно е вредноста на <tt class="docutils literal"><span class="pre">ac</span></tt>  да ја испишаме само ако
+<tt class="docutils literal"><span class="pre">i</span></tt>  е помало од <tt class="docutils literal"><span class="pre">j</span></tt> во код би изгледало вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">print</span> <span class="n">ac</span>
+</pre></div>
+</div>
+<p>Доколку пак имаме за задача од листа на броеви да ги испечатиме
+сите што се помали од 10,  потребно е да поминеме преку секој елемент
+од листата и да го споредиме со 10.
+За ова да го направиме потребно е да искористиме <tt class="docutils literal"><span class="pre">for</span></tt> циклус:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="k">print</span> <span class="n">l</span>
+<span class="gp">...</span>
+<span class="go">15</span>
+<span class="go">20</span>
+<span class="go">25</span>
+</pre></div>
+</div>
+<p>Во зависност од потребите што ги имаме исто така може да го користиме и
+<tt class="docutils literal"><span class="pre">While</span></tt> циклисот или комбинација од циклус и услов како што беше случајот
+во претходниот пример.</p>
+</div>
+<div class="section" id="id6">
+<h2>Функции<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>Функциите претставуваат целина од код која што извршува одредена задача.
+Секоја програма е составена од поголем број на функции.
+Python содржи доста предефинирани функции кои што може да ги користиме
+со нивно повикување. Така на пример доколку е потребно буквите во една
+реченица да ги направиме големи тоа се прави со повикување на
+функцијата upper:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ac</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="go">&#39;MY FIRST PYTHONIC CODE, IT REALY SIMPLE BUT POWERFUL&#39;</span>
+</pre></div>
+</div>
+<p>Освен предефинирани функции, исто така може и ние да креираме функција
+според нашите потреби што после тоа ќе ја користиме во апликацијата.
+Впрочем на тој начин најдобро и би го организирале кодот и не би имале потреба да пишуваме
+идентичен код на повеќе места туку само со повикување на соодветната функција
+истиот би се извршил. Во примерот што следува ќе дефинираме функција што пресметува два броја
+и како повратна информација го враќа нивниот резултат:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">30</span>
+</pre></div>
+</div>
+<p>Дефинирањето на функција во python изгледа како на горниот пример односно
+пред секоја функција потребно е да стои предефинираниот збор <tt class="docutils literal"><span class="pre">def</span></tt> и во
+продолжение името на функцијата веднаш до него во мали загради влезните параметри.
+Влезните параметри може да бидат задолжителни
+(оние без кои не може да се повика функцијата) или незадолжителни
+односно параметри со предефинирана вредност која што вредност ќе ја земат
+доколку не се проследат при повикување на функцијата. На пример:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">15</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>Класи и Објекти<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>Движејќи се напред низ ова кратко резиме за python доаѓаме еден чекор понапред
+во организациската поставеност на python програма, а тоа се објектите односно класи.
+Ако функцијата наједноставно ја дефиниравме како целина на код
+која што има за цел да изврши конкретна задача овдека на сличен начин
+ќе ги дефинираме објектите како група од функции и променливи кои што
+треба да претстават одредена целина во апликацијата
+односно со нивна помош да може соодветниот објект да ги опише неговите
+специфични карактеристики и активности. За да го појасниме претходно иснесеното ќе
+дадеме соодветен пример за класа која што ги опипува основните карактеристики на човекот.
+За секој човек се заеднички следниве карактеристики:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Име</li>
+<li>Презиме</li>
+<li>Датум на раѓањe</li>
+</ul>
+</div></blockquote>
+<p>Ова во python би изгледало вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">Person</span><span class="p">:</span>
+<span class="go">      def __init__(self, first_name, last_name, birthday):</span>
+<span class="go">         self.first_name=first_name</span>
+<span class="go">         self.last_name=last_name</span>
+<span class="go">         self.birthday=birthday</span>
+<span class="go">      def my_info(self):</span>
+<span class="go">         return &#39;Name: &#39; + self.first_name + &#39; &#39; + self.last_name + &#39; Birthday:  &#39; + self.birthday</span>
+</pre></div>
+</div>
+<p>Секој објек се дефинира со резервниот збор <tt class="docutils literal"><span class="pre">class</span></tt> и по него следи името на класата.
+<tt class="docutils literal"><span class="pre">__init__()</span></tt> Претставува конструктор на класата.
+При креирање на инстанца од класата  влезните аргументи доделени на класата
+овој метод ги проследува до соодветните променливи во класата:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">test_person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="n">first_name</span><span class="o">=</span><span class="s">&#39;Test&#39;</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="s">&#39;Person&#39;</span><span class="p">,</span> <span class="n">birthday</span><span class="o">=</span><span class="s">&#39;12.08.2000&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">self</span></tt> претставува покажувач кон самиот себе. Во последниот дел од класата
+е дефиниран метод кои што враќа информации за одреден <tt class="docutils literal"><span class="pre">Person</span></tt> објект.
+Овој метод за секоја информација да ја земе од променливите на објектот
+пристапува до нив преку self.</p>
+<p>Така ако сакаме информација за веќе креираната инстанца од Person моделот
+го повикуваме методот my_info:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">test_person</span><span class="o">.</span><span class="n">my_info</span><span class="p">()</span>
+<span class="go">&#39;Name: Test Person Birthday: 12.08.2000&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>Модули<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>Модулите во python претставуваат фајлови со .py  екстензија кои содржат
+Класи или Функции. Секој модул може да се додаде во друг со резервниот збор
+<tt class="docutils literal"><span class="pre">import</span></tt> и името на модулот. После додавањето на модулот функциите и класите
+од истиот може да се користат во тековниот модул.
+На пример доколку сакаме да го користиме методот <tt class="docutils literal"><span class="pre">findall</span></tt>  од <tt class="docutils literal"><span class="pre">re</span></tt>
+модулот го пишуваме следниов код:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">re</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">re</span><span class="o">.</span><span class="n">findall</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>при што се повикува методот со соодветните влезни променливи за истиот.</p>
+<p>Ова е само мал дел од тоа што се нуди овој програмски јазик за
+подетално совладување на овој програмски јазик следуваат во продолжение неколку линкови.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://docs.python.org/2/tutorial/">http://docs.python.org/2/tutorial/</a></li>
+<li><a class="reference external" href="http://www.tutorialspoint.com/python/">http://www.tutorialspoint.com/python/</a></li>
+<li><a class="reference external" href="http://sthurlow.com/python/">http://sthurlow.com/python/</a></li>
+</ul>
+</div></blockquote>
+<p>Една од најдобрите книги за python е &#8216;Dive Into Python&#8217; во истата целава проблематика
+многу добро е објаснета.
+Истата е бесплатна и можете да се симне на <a class="reference external" href="http://www.diveintopython.net/index.html">линкот</a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tdd.html" title="Test Driven Development (TDD)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="marionette.html" title="Marionette.js"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

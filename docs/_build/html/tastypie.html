@@ -1,0 +1,516 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tastypie &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Django" href="django.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="django.html" title="Django"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tastypie</a><ul>
+<li><a class="reference internal" href="#socialnet">Креирање на Ресурси во SocialNet</a></li>
+<li><a class="reference internal" href="#unit-tests-tastypie">Креирање на Unit tests со Tastypie</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="django.html"
+                        title="previous chapter">Django</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/tastypie.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tastypie">
+<span id="id1"></span><h1>Tastypie<a class="headerlink" href="#tastypie" title="Permalink to this headline">¶</a></h1>
+<p>Tastypie претставува webservice framework за Django. Истата овозможува креирање
+на REST-style интерфејс. Целата комуникација помеѓу клиентската и серверската
+апликација е токму преку tastypie.
+Како што спомнавме претходно tastypie овозможува REST-style архитектура,
+а REST-style архитектурата користи ресурси што значи и tastypie се заснова на
+креирање на ресурси кои што се всушност python класи со субкласа <tt class="docutils literal"><span class="pre">tastypie.resources.Resource</span></tt>.
+Убава практика е кодот за овие ресурси да го чуваме во претходно креиран пакет
+со име api.
+Исто така за секоја апликација потребно е да се регистрира соодветно <tt class="docutils literal"><span class="pre">api</span></tt> и
+неговите <tt class="docutils literal"><span class="pre">urls</span></tt> да се додадат во <tt class="docutils literal"><span class="pre">django</span> <span class="pre">urls</span></tt>.
+При тоа секој нов ресурс потребно е да се регистрира во претходно креираното <tt class="docutils literal"><span class="pre">api</span></tt>.</p>
+<p>Најчесто за секој креиран модел потребно е да се креира соодветен ресурс,
+конкретно за секој модел што има потреба за интеракција со клиентската страна
+потребно е да се креира соодветен негов ресурс. Така за Person моделот што го
+креиравме на почеток ресурсот би изгледал вака:</p>
+<div class="highlight-python"><pre>class RelationPersonResource(Resource):
+    class Meta:
+        queryset = Person.objects.filter()
+        resource_name = 'relation_person'
+        fields = ['id', 'first_name', 'last_name']
+        authentication = SessionAuthentication()
+                authorization = Authorization()</pre>
+</div>
+<p>Всушност секој ресурс е python класа која што како субкласа ја содржи
+<tt class="docutils literal"><span class="pre">tastypie.resources.Resource</span></tt> или класа која што во себе ја содржи оваа.</p>
+<p>Во Meta класата се дефинираат основните параметри на ресурсот од кој модел
+да ги зема податоците, всушност за кој модел се однесува, со кое име клиентот
+да пристапи до истата, кои полиња може да ги гледа клиентот аутентикација итн.
+Сите овие полиња детално се објаснети во самата
+<a class="reference external" href="http://django-tastypie.readthedocs.org/en/latest/tutorial.html">документација</a>
+на Tastypie и која што мора да ја разгледате за да  може да продолжите во
+следната фаза од проектов.</p>
+<div class="section" id="socialnet">
+<h2>Креирање на Ресурси во SocialNet<a class="headerlink" href="#socialnet" title="Permalink to this headline">¶</a></h2>
+<p>Во SocialNet апликацијата потребно е да се креира за секој модел соодветен
+ресурс со кој што истиот ќе биде претставен на клиентот.
+Така за моделот Person иницијалниот ресурс изгледа вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">PersonResource</span><span class="p">(</span><span class="n">BaseModelResource</span><span class="p">):</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">queryset</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">resource_name</span> <span class="o">=</span> <span class="s">&#39;persons&#39;</span>
+        <span class="n">excludes</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="s">&#39;is_staff&#39;</span><span class="p">,</span> <span class="s">&#39;is_superuser&#39;</span><span class="p">,</span>
+                    <span class="s">&#39;last_login&#39;</span><span class="p">,</span> <span class="s">&#39;date_joined&#39;</span><span class="p">)</span>
+        <span class="n">always_return_data</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="n">list_allowed_methods</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;get&#39;</span><span class="p">,</span> <span class="s">&#39;post&#39;</span><span class="p">)</span>
+        <span class="n">detail_allowed_methods</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;get&#39;</span><span class="p">,</span> <span class="s">&#39;post&#39;</span><span class="p">,</span> <span class="s">&#39;patch&#39;</span><span class="p">,</span> <span class="s">&#39;delete&#39;</span><span class="p">)</span>
+        <span class="n">authentication</span> <span class="o">=</span> <span class="n">SessionAuthentication</span><span class="p">()</span>
+        <span class="n">authorization</span> <span class="o">=</span> <span class="n">Authorization</span><span class="p">()</span>
+
+        <span class="n">filtering</span> <span class="o">=</span> <span class="p">{</span>
+                     <span class="s">&#39;username&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;exact&#39;</span><span class="p">,</span> <span class="p">),</span>
+                     <span class="p">}</span>
+</pre></div>
+</div>
+<p>Овој ресурс како и сите останати во проектов наследува од <tt class="docutils literal"><span class="pre">BaseModelResource</span></tt>
+која што во себе содржи дополнување на одредени методи од tastypie за да може
+динамички да ги повикуваме методите кои што ги имаме имплементирано претхоно
+во моделите. Нема детално да се задржуваме сега на оваа класа едноставно ќе
+ја употребуваме како таква.</p>
+<p>Податоците за Person ресурсот се земаат од соодветниот Person модел, до истиот
+можеме да пристапиме преку неговото име <tt class="docutils literal"><span class="pre">persons</span></tt>, полиња кои што не сакаме да се
+прикажуваат на клиентска страна се: <tt class="docutils literal"><span class="pre">password,</span> <span class="pre">is_staf,</span> <span class="pre">is_superuser,</span> <span class="pre">last_login,</span> <span class="pre">date_joined.</span></tt>
+Методи кои што се дозволени во овој ресурс се: <tt class="docutils literal"><span class="pre">post,</span> <span class="pre">get</span></tt> како list methods
+и <tt class="docutils literal"><span class="pre">get,</span> <span class="pre">post,</span> <span class="pre">patch,</span> <span class="pre">delete</span></tt> како detail methods.
+Дефинирани се соодветна аутентикација и ауторизација за ресурсот и дозволено е
+филтрирање според username.</p>
+<p>За повикување на секој од модел методите потребно е секој од нив да биде
+дефиниран во <tt class="docutils literal"><span class="pre">Meta</span></tt> класата на ресурсот, заедно со неговата валидациона форма
+и параметрите кои што истиот ги прима. За повикување на методите за едитирање
+на корисник потребно е да се направи следнава дефиниција:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">inline_forms</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;UPDATE_PERSON&#39;</span><span class="p">:</span> <span class="n">UpdatePersonForm</span><span class="p">,</span>
+                <span class="s">&#39;RESET_PASSWD&#39;</span><span class="p">:</span> <span class="n">ResetPasswordForm</span><span class="p">,</span>
+                <span class="p">}</span>
+<span class="n">update_methods</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;UPDATE_PERSON&#39;</span><span class="p">:</span> <span class="s">&#39;update_person&#39;</span><span class="p">,</span>
+                  <span class="s">&#39;RESET_PASSWD&#39;</span><span class="p">:</span> <span class="s">&#39;reset_password&#39;</span><span class="p">,</span>
+                  <span class="p">}</span>
+<span class="n">update_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;UPDATE_PERSON&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;first_name&#39;</span><span class="p">,</span> <span class="s">&#39;last_name&#39;</span><span class="p">,</span>
+                                   <span class="s">&#39;username&#39;</span><span class="p">,</span> <span class="s">&#39;email&#39;</span><span class="p">,</span> <span class="s">&#39;description&#39;</span><span class="p">,</span>
+                                   <span class="s">&#39;phone&#39;</span><span class="p">,</span> <span class="s">&#39;birthday&#39;</span><span class="p">,</span> <span class="s">&#39;gender&#39;</span><span class="p">),</span>
+                 <span class="s">&#39;RESET_PASSWD&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s">&#39;old_password&#39;</span><span class="p">,</span> <span class="s">&#39;new_password&#39;</span><span class="p">),</span>
+                 <span class="p">}</span>
+</pre></div>
+</div>
+<p>За секој метод потребно е да имаме соодветен клуч за едитирање така за промена
+на лозинка соодветниот клуч е <tt class="docutils literal"><span class="pre">RESET_PASSWD</span></tt>, во делот <tt class="docutils literal"><span class="pre">inline_forms</span></tt> ја
+дефинираме формата која што одговара на соодветниот клуч во нашиот случај тоа
+е формата за промена на лозинка, во вториот дел го дефинираме името на методот
+што одговара на овој  клуч во нашиот случај <tt class="docutils literal"><span class="pre">reset_password</span></tt> и во последниот
+<tt class="docutils literal"><span class="pre">dict</span></tt> ги дефинираме полињата кои што ги прима како влезни аргументи методот
+<tt class="docutils literal"><span class="pre">old_password,</span> <span class="pre">new_password</span></tt>.
+Со ова ние всушност ја дефиниравме комуникацијата помеѓу клиентот и соодветниот
+модел на серверската страна за промена на лозинка. На ист начин се дефинираат
+сите останати методи за едитирање.
+Методите за бришење се дефинираат на сосема ист начин со тоа што имињата на овие
+параметри се: <tt class="docutils literal"><span class="pre">delete_forms,</span> <span class="pre">delete_methods,</span> <span class="pre">delete_fields</span></tt>. Пример за оваа
+дефиницја следи во продолжение:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">delete_form</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REMOVE_PERSON&#39;</span><span class="p">:</span> <span class="n">BaseDeleteForm</span><span class="p">}</span>
+<span class="n">delete_method</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REMOVE_PERSON&#39;</span><span class="p">:</span> <span class="s">&#39;remove_person&#39;</span><span class="p">}</span>
+<span class="n">delete_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;REMOVE_PERSON&#39;</span><span class="p">:</span> <span class="p">()}</span>
+</pre></div>
+</div>
+<p>Во конкретнио случај методот за креирање на нов корисник е специфичен
+бидејќи мора да се дозволи POSТ до ресурсот од страна на коирсник кој што
+сеуште не е логиран во системот. Поради тоа овој метод потребно е да има
+специјална имплементација:</p>
+<div class="highlight-python"><pre>def prepend_urls(self):
+        return [
+            url(r"^(?P&lt;persons&gt;%s)/create_account%s$" \
+                        % (self._meta.resource_name, trailing_slash()),
+                        self.wrap_view('create_account'),
+                        name="social_net_api"),
+        ]
+
+def create_account(self, request, **kwargs):
+        self.method_check(request, allowed=['post'])
+        self.throttle_check(request)
+
+        body = request.raw_post_data
+        deserialized = self.deserialize(request, body,
+                format=request.META.get('CONTENT_TYPE', 'application/json'))
+        deserialized = \
+                    self.alter_deserialized_detail_data(request, deserialized)
+
+        form = CreateNewPersonForm(deserialized)
+
+        if not form.is_valid():
+            raise ValidationError(form.errors)
+
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        email = form.cleaned_data['email']
+        description = form.cleaned_data['description']
+        phone = form.cleaned_data['phone']
+        birthday = form.cleaned_data['birthday']
+        gender = form.cleaned_data['gender']
+
+        person = Person.create_person(first_name, last_name, username,
+                                      password, email, gender, description,
+                                      phone, birthday)
+
+         return self.create_response(request, dict(id=person.pk),
+                                    response_class=HttpCreated)</pre>
+</div>
+<p>И во овој метод се прави валидација на податоците преку претходно креираната форма,
+повикување на модел методот за креирање нов корисник и враќање <tt class="docutils literal"><span class="pre">response</span></tt> кон
+клиентот со потребните информации за новокреираниот корисник.</p>
+<p>Во сите останати ресурси дефинирањето за креирање на нов објект од конкретен
+модел е на ист начин, преку дефинирање на параметри во Meta класата за истиот,
+во продолжение следува пример за креирање на нова релација помеќу два контакти:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">validation</span> <span class="o">=</span> \
+            <span class="n">CleanedDataFormValidation</span><span class="p">(</span><span class="n">form_class</span><span class="o">=</span><span class="n">CreateNewRelationForm</span><span class="p">)</span>
+<span class="n">create_method</span> <span class="o">=</span> <span class="s">&#39;add_relation&#39;</span>
+<span class="n">create_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;second_contact_id&#39;</span><span class="p">,</span> <span class="s">&#39;relation&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Формата за валидација ја дефинираме преку tastypie  класата <tt class="docutils literal"><span class="pre">CleanedDataFormValidation</span></tt>,
+и ги дефинираме соодветниот метод за креирање на објект и параметри кои што ги
+прима истиот.
+Во најголем број на случаеви еден модел може да има само еден метод за креирање
+на нов објек од истиот, поради тоа во овој случај нема потреба за дефинирање на
+клуч за креирање на објектот.</p>
+<p>Доколку клиентот има потреба од некој дополнителни информации за објектот кои што
+не се содржани во самиот модел за истиот, истите можат да се дефинираат во
+dehydrate методот. За ова може повеќе да најдете
+<a class="reference external" href="http://django-tastypie.readthedocs.org/en/v0.10.0/resources.html#dehydrate">тука</a></p>
+<p>Следува соодветен пример од Person ресурсот на SocialNet апликацијата:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">dehydrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">):</span>
+     <span class="c"># Remove password field from the data that will be send to client.</span>
+     <span class="n">bundle</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&#39;password&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+     <span class="n">rel_counts</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">relations_count</span><span class="p">()</span>
+
+     <span class="c"># If full view is requested must be returned</span>
+     <span class="c"># all friends, requested_friends and friend_requests for the contact</span>
+     <span class="k">if</span> <span class="n">bundle</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">META</span><span class="p">[</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;GET&#39;</span> <span class="ow">and</span> \
+                 <span class="n">bundle</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;view_type&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#39;OWN_VIEW&#39;</span><span class="p">:</span>
+
+         <span class="n">bundle</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;requested_friends_num&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                                         <span class="n">rel_counts</span><span class="p">[</span><span class="s">&#39;requested_friends_num&#39;</span><span class="p">]</span>
+         <span class="n">bundle</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;friend_requests_num&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                                         <span class="n">rel_counts</span><span class="p">[</span><span class="s">&#39;friend_requests_num&#39;</span><span class="p">]</span>
+
+     <span class="n">bundle</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;friends_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rel_counts</span><span class="p">[</span><span class="s">&#39;friends_num&#39;</span><span class="p">]</span>
+     <span class="n">bundle</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;messages_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">activities</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+     <span class="n">bundle</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s">&#39;comments_num&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+     <span class="k">return</span> <span class="n">bundle</span>
+</pre></div>
+</div>
+<p>Врз основа на досега образложеното потребно е да бидат креирани ресурси за секој
+од останатите модели со соодветните дефиниции за нив.</p>
+</div>
+<div class="section" id="unit-tests-tastypie">
+<h2>Креирање на Unit tests со Tastypie<a class="headerlink" href="#unit-tests-tastypie" title="Permalink to this headline">¶</a></h2>
+<p>Многу е важно да имаме интегрирани тестови за целата апликација вклучувајќи го
+и делот за интеракција помеѓу  клиентот и серверот. Tastypie има интегрирано
+свои класи надоградени на веќе постоечките од Django за полесно пишување на
+тестовите при употреба на овој сервис.
+Во tastypie <a class="reference external" href="http://django-tastypie.readthedocs.org/en/latest/testing.html">документацијата</a>
+има детално објаснување за овие класи.</p>
+<p>Во претходниот пример даден за django unit tests можеме да забележиме дека
+всушност тест класата не наследува од <tt class="docutils literal"><span class="pre">TestCase</span></tt> туку од <tt class="docutils literal"><span class="pre">ResourceTestCase</span></tt>
+што претставува интегрирана класа од tastypie.</p>
+<p>Постојат неколку видови на requiest-и што може да направи клиентот до
+серверот и тоа: <tt class="docutils literal"><span class="pre">get,</span> <span class="pre">post,</span> <span class="pre">patch,</span> <span class="pre">put</span> <span class="pre">и</span> <span class="pre">delete</span></tt>.
+Во продолжение за секој од нив ќе дадеме соодветен пример на тест.</p>
+<p>При креирање на одреден ресурс, потребно е да видиме дали комуникацијата помеѓу
+овој ресурс и клиентот е воспоставена и ги враќа посакуваните објекти.
+Задачата на наредниот тест е токму таа:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_get_persons_from_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;/social_net/api/1/persons/?format=json&#39;</span>
+
+     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_c</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+                               <span class="n">HTTP_X_REQUESTED_WITH</span><span class="o">=</span><span class="s">&#39;XMLHttpRequest&#39;</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertHttpOK</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Во <tt class="docutils literal"><span class="pre">setUp</span></tt> методот дефинирамe инстанца од api_c клиентот кои што ги содржи методите
+за сите овие видови на requests до сервер-от.
+За да направиме <tt class="docutils literal"><span class="pre">GET</span></tt> request до серверот потребно е да имаме дефинирано url
+на кое сакаме да пристапиме, односно url со кое пристапуваме до ресурсот,
+после тоа формат на податоците во нашиов случај <tt class="docutils literal"><span class="pre">json</span></tt>, и како плус параметар
+специфицираме HTTP header  <tt class="docutils literal"><span class="pre">HTTP_X_REQUESTED_WITH</span></tt> кој што овозможува тестирање
+на <tt class="docutils literal"><span class="pre">django.http.HttpRequest.is_ajax()</span></tt> методи. Што значи конкретно во нашиот случај
+можеме и да го изоставиме. Во следниот момент проверуваме дали ресурсот од овој
+request е со статус 200 што значи дека истиот е успешен. Со <tt class="docutils literal"><span class="pre">response.content</span></tt>
+ја земеме датата која што ја враќа овој response.</p>
+<p>Доколку сакаме да креираме нов корисник во системот потребно е да направиме
+<tt class="docutils literal"><span class="pre">POST</span></tt> request до соодветниот ресурс на серверот. Тестот за креирање на нов
+корисник изгледа вака:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_create_new_person</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">         Create new person in the system  with full data.</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+     <span class="n">first_name</span> <span class="o">=</span> <span class="s">&#39;Test&#39;</span>
+     <span class="n">last_name</span> <span class="o">=</span> <span class="s">&#39;Person&#39;</span>
+     <span class="n">username</span> <span class="o">=</span> <span class="s">&#39;test.person&#39;</span>
+     <span class="n">password</span> <span class="o">=</span> <span class="s">&#39;12345&#39;</span>
+     <span class="n">email</span> <span class="o">=</span> <span class="s">&#39;test@mail.com&#39;</span>
+     <span class="n">description</span> <span class="o">=</span> <span class="s">&#39;Test description&#39;</span>
+     <span class="n">phone</span> <span class="o">=</span> <span class="s">&#39;+2165125498425&#39;</span>
+     <span class="n">birthday</span> <span class="o">=</span> <span class="s">&#39;1989-12-01&#39;</span>
+     <span class="n">gender</span> <span class="o">=</span> <span class="s">&#39;MALE&#39;</span>
+
+     <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;/social_net/api/1/persons/create_account/&#39;</span>
+     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_c</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+                                <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;first_name&#39;</span><span class="p">:</span> <span class="n">first_name</span><span class="p">,</span>
+                                     <span class="s">&#39;last_name&#39;</span><span class="p">:</span> <span class="n">last_name</span><span class="p">,</span>
+                                     <span class="s">&#39;username&#39;</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span>
+                                     <span class="s">&#39;password&#39;</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span>
+                                     <span class="s">&#39;email&#39;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+                                     <span class="s">&#39;description&#39;</span><span class="p">:</span> <span class="n">description</span><span class="p">,</span>
+                                     <span class="s">&#39;phone&#39;</span><span class="p">:</span> <span class="n">phone</span><span class="p">,</span>
+                                     <span class="s">&#39;birthday&#39;</span><span class="p">:</span> <span class="n">birthday</span><span class="p">,</span>
+                                     <span class="s">&#39;gender&#39;</span><span class="p">:</span> <span class="n">gender</span>
+                                      <span class="p">},</span>
+                                <span class="n">HTTP_X_REQUESTED_WITH</span><span class="o">=</span><span class="s">&#39;XMLHttpRequest&#39;</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertHttpCreated</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+     <span class="n">resp_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resp_data</span><span class="p">,</span> <span class="p">{</span><span class="s">u&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+
+     <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">resp_data</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">])</span>
+
+     <span class="c"># Check db values</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">first_name</span><span class="p">,</span> <span class="n">first_name</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">last_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">username</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">birthday</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;%Y-%m-</span><span class="si">%d</span><span class="s">&#39;</span><span class="p">),</span> <span class="n">birthday</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="n">description</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">phone</span><span class="p">,</span> <span class="n">phone</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">gender</span><span class="p">,</span> <span class="n">MALE</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">password</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Во првиот дел од тестот ги дефинираме сите потребни параметри за креирање на нов
+корисник како посебни променливи, потоа url на кое што треба да биде испратен
+овој request, за симулирање на <tt class="docutils literal"><span class="pre">POST</span></tt> request го повикуваме методот <tt class="docutils literal"><span class="pre">post</span></tt>
+од <tt class="docutils literal"><span class="pre">api_client</span></tt> кој како параметри прима url, форматот на податоците,
+потоа потребните податоци за креирање на нов корисник и
+додатен header доколку е потребен.</p>
+<p>Секој <tt class="docutils literal"><span class="pre">POST</span></tt> request во tastypie  доколку е успешен враќа resopnse со статус
+201, што значи дека нов објект е креиран во нашиов случај тоа е нов корисник.
+На крај потребно е да ги провериме податоците што ги враќа овој response дали
+се оние кои што ги очекуваме и се разбира проверка на сите параметри дали се
+зачувани во база со вистинската вредност.
+Доколку постојат специфични услови за креирање на нов корисник сите тие мора да
+бидат истестирани со посебни тестови за да бидеме сигурни дека напишаниот код
+се однесува онака како што очекуваме.</p>
+<p>Промена на одредени податоци во веќе креиран објект може да се направи со
+<tt class="docutils literal"><span class="pre">PUT/PATCH</span></tt> request до сервер. <tt class="docutils literal"><span class="pre">PUT</span></tt> се користи најчесто за едитирање на цел
+објект додека <tt class="docutils literal"><span class="pre">PATCH</span></tt>  се однесува за поединечно едитирање на одредени полиња
+во ресурсот. Пример за едитирање на одреден податок, во нашиов случај лозинка на
+корисник е даден во следниов пример:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_reset_password</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">         Reset person&#39;s password.</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+     <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">create_person</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">person_data</span><span class="p">)</span>
+
+     <span class="n">old_password</span> <span class="o">=</span> <span class="s">&#39;12345&#39;</span>
+     <span class="n">new_password</span> <span class="o">=</span> <span class="s">&#39;qwerty&#39;</span>
+
+     <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;/social_net/api/1/persons/{0}/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_c</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+                                <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;update_key&#39;</span><span class="p">:</span> <span class="s">&#39;RESET_PASSWD&#39;</span><span class="p">,</span>
+                                      <span class="s">&#39;old_password&#39;</span><span class="p">:</span> <span class="n">old_password</span><span class="p">,</span>
+                                      <span class="s">&#39;new_password&#39;</span><span class="p">:</span> <span class="n">new_password</span><span class="p">,</span>
+                                      <span class="p">},</span>
+                                <span class="n">HTTP_X_REQUESTED_WITH</span><span class="o">=</span><span class="s">&#39;XMLHttpRequest&#39;</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertHttpAccepted</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">response</span><span class="p">),</span> <span class="p">[])</span>
+
+     <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">person</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="n">new_password</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Во овој случај за да правиме промена на податоците, мора веќе да имаме постоечки објект,
+Доколку го немаме најпрвин е потребно истиот да го креираме.
+Понатаму следува дефинирање на потребните параметир што ги очекува серверот во
+нашиот случај старата и нова лозина и на крај url  на кое да биде испрате истиот.
+Методот за симулирање на овој request  е <tt class="docutils literal"><span class="pre">patch</span></tt> и истиот ги прима истите параметри
+како и <tt class="docutils literal"><span class="pre">POST</span></tt> request-от. На крај како одговор од овој request треба да очекуваме
+response со статус 202 или 204 во зависнот дали враќа параметри со него или не.
+Ја проверуваме содржината на response-от и на крај потврдуваме дека променетите податоци
+се запишани во база.</p>
+<p>На крај ни останува уште <tt class="docutils literal"><span class="pre">DELETE</span></tt> request-от кој што се користи доколку сакаме
+да избришеме одреден објект. Пример за тест кои што симулира <tt class="docutils literal"><span class="pre">DELETE</span></tt> request
+кон сервер е даден во продолжение:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_remove_person</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">         Set is_active flag to False.</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+     <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">create_person</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">person_data</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">is_active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">2</span><span class="p">)</span>
+
+     <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;/social_net/api/1/persons/{0}/?delete_key=REMOVE_PERSON&#39;</span><span class="o">.</span>\
+                                                         <span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_c</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+                                <span class="n">HTTP_X_REQUESTED_WITH</span><span class="o">=</span><span class="s">&#39;XMLHttpRequest&#39;</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertHttpAccepted</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">is_active</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Во конкретниот случај корисникот не го бришеме трајно од база но истиот го деактивираме.
+За симулирање на овој request се повикува <tt class="docutils literal"><span class="pre">delete</span></tt> методот од api_client со
+соодветни параметри.
+Response-от на овој request враќа статус код 204 за успешен request.
+Сите претходни тестови очекувавме да бидат успешни, во продолжение еве пример и од
+тест кои што очекуваме да јави грешка:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">test_reset_password_not_match_old</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">         Try to reset password but does not match old one and</span>
+<span class="sd">         server should raise an exceptioon.</span>
+<span class="sd">     &#39;&#39;&#39;</span>
+     <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">create_person</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">person_data</span><span class="p">)</span>
+
+     <span class="n">old_password</span> <span class="o">=</span> <span class="s">&#39;123456&#39;</span>
+     <span class="n">new_password</span> <span class="o">=</span> <span class="s">&#39;qwerty&#39;</span>
+
+     <span class="n">url</span> <span class="o">=</span> <span class="s">&#39;/social_net/api/1/persons/{0}/&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+     <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_c</span><span class="o">.</span><span class="n">patch</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s">&#39;json&#39;</span><span class="p">,</span>
+                                <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;update_key&#39;</span><span class="p">:</span> <span class="s">&#39;RESET_PASSWD&#39;</span><span class="p">,</span>
+                                      <span class="s">&#39;old_password&#39;</span><span class="p">:</span> <span class="n">old_password</span><span class="p">,</span>
+                                      <span class="s">&#39;new_password&#39;</span><span class="p">:</span> <span class="n">new_password</span><span class="p">,</span>
+                                      <span class="p">},</span>
+                                <span class="n">HTTP_X_REQUESTED_WITH</span><span class="o">=</span><span class="s">&#39;XMLHttpRequest&#39;</span><span class="p">)</span>
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertHttpApplicationError</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+                             <span class="s">&#39;{&quot;msg&quot;: &quot;Old password does not match.&quot;}&#39;</span><span class="p">)</span>
+
+     <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">person</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">person</span><span class="o">.</span><span class="n">check_password</span><span class="p">(</span><span class="s">&#39;12345&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Во овој случај очекуваме response – от да јави грешка со статус 500,
+пораката која што ја содрши овој response може да ја добиеме преку
+<tt class="docutils literal"><span class="pre">response.content</span></tt> и таа ја опишува причината за настанатата грешка.
+На крај правиме проверка на податоците во база дека не се променети.</p>
+<p>Врз основа на овие примери и на претходно изнесеното за <tt class="docutils literal"><span class="pre">unit</span> <span class="pre">tests</span></tt> потребно
+е да се направи позитивни и негативни тестови за секој дел од
+<tt class="docutils literal"><span class="pre">SocialNet</span></tt> пликацијата со тоа што ја задржуваме праксата на креирање
+првин тестови па после тоа имплементирање на методи.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="django.html" title="Django"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

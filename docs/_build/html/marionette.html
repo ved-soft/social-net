@@ -1,0 +1,701 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Marionette.js &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="next" title="Python" href="python.html" />
+    <link rel="prev" title="Backbone.js" href="backbone.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="backbone.html" title="Backbone.js"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Marionette.js</a><ul>
+<li><a class="reference internal" href="#views">Views</a></li>
+<li><a class="reference internal" href="#marionette-view">Marionette.View</a></li>
+<li><a class="reference internal" href="#marionette-itemview">Marionette.ItemView</a></li>
+<li><a class="reference internal" href="#marionette-collectionview">Marionette.CollectionView</a></li>
+<li><a class="reference internal" href="#marionette-compositeview">Marionette.CompositeView</a><ul>
+<li><a class="reference internal" href="#view-itemviewcontainer">Потоа ги креираме view-ата и сетираме itemViewContainer.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#marionette-layout">Marionette.Layout</a><ul>
+<li><a class="reference internal" href="#layout">Откако ќе се изрендерира layout-от имаме целосен пристап до неговите региони.</a></li>
+<li><a class="reference internal" href="#addregion">addRegion</a></li>
+<li><a class="reference internal" href="#addregions">addRegions</a></li>
+<li><a class="reference internal" href="#removeregions">removeRegions</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#application">Application</a></li>
+<li><a class="reference internal" href="#router">Router</a></li>
+<li><a class="reference internal" href="#controller">Controller</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="backbone.html"
+                        title="previous chapter">Backbone.js</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="python.html"
+                        title="next chapter">Python</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/marionette.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="marionette-js">
+<span id="marionette"></span><h1>Marionette.js<a class="headerlink" href="#marionette-js" title="Permalink to this headline">¶</a></h1>
+<p>Backbone.Marionette е композитна библиотека за Backbone.js што ја олеснува и симплифицира
+конструкцијата на големи javascript апликации.
+Предноста на користењето на Marionette во Backbone апикациите е тоа што овој плагин ни ја олеснува
+работата со views.</p>
+<div class="section" id="views">
+<h2>Views<a class="headerlink" href="#views" title="Permalink to this headline">¶</a></h2>
+<p>Marionette.View го наследува Backbone.View. Ги имаме следните типови на views во Marionette:</p>
+<ul class="simple">
+<li>Marionette.View: Base View type што другите Marionette views го наследуваат (Не се користи директно).</li>
+<li>Marionette.ItemView: View што рендерира само една инстанца.</li>
+<li>Marionette.CollectionView: View коешто итерира врз collection, и рендерира по една ItemView инстанца за секој модел.</li>
+<li>Marionette.CompositeView: Содржи model и collection. Рендерира Collection view и item view.</li>
+<li>Marionette.Layout: View коешто рендерира layout и креира региони и регион менаџер што ги менаџира полињата во него.</li>
+</ul>
+</div>
+<div class="section" id="marionette-view">
+<h2>Marionette.View<a class="headerlink" href="#marionette-view" title="Permalink to this headline">¶</a></h2>
+<p>Marionette има основен Marionette.View тип на View од кој наследуваат сите други Views.
+Овој основен view ги содржи сите заеднички својства и функционалности што ги користат сите други views.
+Овој тип не е наменет да се користи директно. Тој постои како основен view за да можат
+другите views да го наследат.</p>
+<p>Прикачување на евенти во Marionette.View препорачливо е да се прави со listenTo.:</p>
+<div class="highlight-python"><pre>MyView = Backbone.Marionette.ItemView.extend({
+  initialize: function(){
+    this.listenTo(this.model, "change:foo", this.modelChanged);
+    this.listenTo(this.collection, "add", this.modelAdded);
+  },
+
+  modelChanged: function(model, value){
+  },
+
+  modelAdded: function(model){
+  }
+});</pre>
+</div>
+<p>При затворање на view се повикуваат onBeforeClose, onClose методите, се бришат сите евенти
+сетирани на DOM елементите, се брише this.el од DOM.
+Доколку имплементирате onClose метод во вашата дефиниција на view-то, таа ќе биде повикана
+при затворање на view-to. За разлика од onClose, onBeforeClose методот се повикува веднаш пред
+бришењето на view-то. Доколку оваа функција ни врати false, при повик на close() view-то нема
+да биде затворено.:</p>
+<div class="highlight-python"><pre>Backbone.Marionette.ItemView.extend({
+  onClose: function(){
+    // custom cleanup or closing code, here
+  }
+});
+
+MyView = Marionette.View.extend({
+
+  onBeforeClose: function(){
+    // prevent the view from being closed
+    return false;
+  }
+
+});
+
+var v = new MyView();
+
+v.close(); // view will remain open</pre>
+</div>
+</div>
+<div class="section" id="marionette-itemview">
+<h2>Marionette.ItemView<a class="headerlink" href="#marionette-itemview" title="Permalink to this headline">¶</a></h2>
+<p>ItemView е view кое прикажува еден item. Toj item може да биде Backbone.Model или може да
+биде Backbone.Collection којашто ќе се третира како една ставка.
+Класата ItemView наследува директно од Marionette.View.
+Има render метод во неа кој се користи за рендерирање на темплејти наменети за тоа view.
+За оваа акција да биде извршена, треба да му сетираме template атрибут на ItemView-то. Тој
+треба да биде jQuery селектор.:</p>
+<div class="highlight-python"><pre>MyView = Backbone.Marionette.ItemView.extend({
+  template: "#some-template"
+});
+
+new MyView().render();</pre>
+</div>
+<p>За рендерирање на Backbone.Collection најдобро е да користиме CollectionView или CompositeView, но
+ако ни е потребно да изрендерираме една обична листа каде што не ни е потребна никаква интеракција
+можеме да искористиме и ItemView.
+::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>&lt;script id="some-template" type="text/html"&gt;
+  &lt;ul&gt;
+    &lt;% _.each(items, function(item){ %&gt;
+    &lt;li&gt; &lt;%= item.someAttribute %&gt; &lt;/li&gt;
+    &lt;% }); %&gt;
+  &lt;/ul&gt;
+&lt;/script&gt;
+
+var MyItemsView = Marionette.ItemView.extend({
+  template: "#some-template"
+});
+
+var view = new MyItemsView({
+  collection: someCollection
+});</pre>
+</div>
+<p>Ова е пример како тоа можеме да прикажеме Backbone.Collection со ItemView.
+Евенти што се тригерираат при рендерирање на еден ItemView се &#8220;before:render&#8221;/onBeforeRender
+и &#8220;render&#8221; / onRender. onBeforeRender се извршува пред да биде почнато рендерирањето на темплејтот.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>Backbone.Marionette.ItemView.extend({
+  onBeforeRender: function(){
+    // set up final bits just before rendering the view's `el`
+  }
+});</pre>
+</div>
+<p>A додека onRender се извршува откако темплејтот ќе биде рендериран.:</p>
+<div class="highlight-python"><pre>Backbone.Marionette.ItemView.extend({
+  onRender: function(){
+    // manipulate the `el` here. it's already
+    // been rendered, and is full of the view's
+    // HTML, ready to go.
+  }
+});</pre>
+</div>
+<p>Организација на UI елементите во Marionette View се прави така што можеме да сетираме ui атрибут,
+кадешто со jQuery селектори ќе ги дефинираме сите UI елементи што ни се потребни за користење
+во тој view. Потоа во другите методи на view-то можеме да ги повикаме со this.ui.elementName.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>Backbone.Marionette.ItemView.extend({
+  tagName: "tr",
+
+  ui: {
+    checkbox: "input[type=checkbox]"
+  },
+
+  onRender: function() {
+    if (this.model.get('selected')) {
+      this.ui.checkbox.addClass('checked');
+    }
+  }
+});</pre>
+</div>
+<p>Исто така во Marionette View постојат евенти што се поврзани директно со моделите или колекциите,
+како на пример modelEvents, collectionEvents:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Marionette</span><span class="o">.</span><span class="n">ItemView</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span>
+  <span class="n">modelEvents</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;change&quot;</span><span class="p">:</span> <span class="s">&quot;modelChanged&quot;</span>
+  <span class="p">},</span>
+
+  <span class="n">collectionEvents</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">&quot;add&quot;</span><span class="p">:</span> <span class="s">&quot;modelAdded&quot;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Од овој пример може да видиме дека при промена на некој модел, ќе се изврши modelChanged методот,
+додека во вториот случај modelAdded ќе се изврши при секое додавање на model во collection-от на тоа view.</p>
+</div>
+<div class="section" id="marionette-collectionview">
+<h2>Marionette.CollectionView<a class="headerlink" href="#marionette-collectionview" title="Permalink to this headline">¶</a></h2>
+<p>CollectionView е таков тип на view, којшто ќе помине низ целата низа од модели во collection
+и ќе ги рендерира сите користејќи специфициран itemView, потоа el елементите од сите itemViews
+ќе ги прикачи на неговиот el елемент. За да сетираме itemView во нашиот collection view треба
+да користиме Backbone view дефиниран објект, а не негова инстанца. Може да биде било кој
+Backbone.View или Marionette.ItemView
+::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">MyItemView</span> <span class="o">=</span> <span class="n">Backbone</span><span class="o">.</span><span class="n">Marionette</span><span class="o">.</span><span class="n">ItemView</span><span class="o">.</span><span class="n">extend</span><span class="p">({});</span>
+
+<span class="n">Backbone</span><span class="o">.</span><span class="n">Marionette</span><span class="o">.</span><span class="n">CollectionView</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span>
+  <span class="n">itemView</span><span class="p">:</span> <span class="n">MyItemView</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Во многу случаеви ќе мора да префрлите некој податок од collection view до секоја инстанца
+од itemView. За да го направите тоа треба да дефинирате itemViewOptions во вашиот CollectionView
+и тоа ќе биде префрлено во вашиот itemView како дел од опциите.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>ItemView = Backbone.Marionette.ItemView({
+  initialize: function(options){
+    console.log(options.foo); // =&gt; "bar"
+  }
+});
+
+CollectionView = Backbone.Marionette.CollectionView({
+  itemView: ItemView,
+
+  itemViewOptions: {
+    foo: "bar"
+  }
+});</pre>
+</div>
+<p>Исто така itemViewOptions може да ја сетирате и како функција, доколку имате потреба да пресметате
+нешто. Функцијата мора да враќа објект кадешто атрибутите од објектот ќе бидат копирани во
+инстанцата на itemView како опции.
+:::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>CollectionView = Backbone.Marionette.CollectionView({
+  itemViewOptions: function(model, index) {
+    // do some calculations based on the model
+    return {
+      foo: "bar",
+      itemIndex: index
+    }
+  }
+});</pre>
+</div>
+<p>Кога колекцијата не содржи ниту еден објект т.е. таа е празна, можете да специфицирате emptyView
+атрибут на вашиот CollectionView.
+::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>NoItemsView = Backbone.Marionette.ItemView.extend({
+  template: "#show-no-items-message-template"
+});
+
+Backbone.Marionette.CollectionView.extend({
+  // ...
+
+  emptyView: NoItemsView
+});</pre>
+</div>
+<p>Доколку Collection-от на ова view е празен, тогаш ќе се изрендерира NoItemsView.</p>
+<p>Исто како и во ItemView и тука се извршуваат евентите при рендерирање onBeforeRender и onRender, како
+и евентите при close на view, onClose и onBeforeClose. Други евенти што постојат во CollectionView
+се евентите при додавање и бришење на itemView. Имаме onBeforeItemAdded, метод што се извршува секогаш
+пред додавање на ItemView, onAfterItemAdded, метод што се извршува секогаш после додавање на ItemView
+и onItemRemoved, метод што се извршува секогаш кога некој ItemView ќе биде избришан од CollectionView.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>Backbone.Marionette.CollectionView.extend({
+  onBeforeItemAdded: function(itemView){
+    // work with the itemView instance, here
+  },
+ onAfterItemAdded: function(itemView){
+    // work with the itemView instance, here
+  },
+onItemRemoved: function(itemView){
+    // work with the itemView instance, here
+  }
+});</pre>
+</div>
+<p>При извршување на евентите &#8220;add&#8221;, &#8220;remove&#8221; и &#8220;reset&#8221; на дефинираниот Collection, во CollectionView-то
+ќе се извршат следните акции. За &#8220;add&#8221; CollectionView-то ќе го изрендерира само новиот додаден модел.
+При &#8220;remove&#8221; на item од CollectionView-то ќе се затвори само тоа ItemView што е избришано. При &#8220;reset&#8221;
+на Collection, CollectionView-то ќе се изрендерира повторно, т.е. ќе го повика методот render.
+CollectionView-то само по себе ги прилепува itemView-ата на својот el елемент со jQuery функцијата append.
+Но доколку имаме потреба да ги прикачиме на друг елемент, тогаш можеме да ја употребиме функцијата
+appendHtml која прима три параметри collectionView, itemView, index.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>Backbone.Marionette.CollectionView.extend({
+
+    // The default implementation:
+  appendHtml: function(collectionView, itemView, index){
+    collectionView.$el.append(itemView.el);
+  }
+
+});</pre>
+</div>
+</div>
+<div class="section" id="marionette-compositeview">
+<h2>Marionette.CompositeView<a class="headerlink" href="#marionette-compositeview" title="Permalink to this headline">¶</a></h2>
+<p>CompositeView наследува од CollectionView и го надополнува за да може да се искористи за посебни
+случаеви кога треба да се прикаже некој објект кој самиот во себе има и листа. Најдобар пример
+што можеме да го наведеме за користење на овој тип на view е TreeView.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>CompositeView = Backbone.Marionette.CompositeView.extend({
+  template: "#leaf-branch-template"
+});
+
+new CompositeView({
+  model: someModel,
+  collection: someCollection
+});</pre>
+</div>
+<p>CompositeView има атрибут itemViewContainer којшто се користи за да сетираме елемент кадешто
+itemView-ата од Collection-от ќе се прикачуваат. Ќе дадеме пример за употреба на еден CompositeView.
+За почеток потребни ни се два темплејти, еден за itemView-ата, а другиот за самиот CompositeView.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>&lt;script id="row-template" type="text/html"&gt;
+  &lt;td&gt;&lt;%= someData %&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%= moreData %&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;%= stuff %&gt;&lt;/td&gt;
+&lt;/script&gt;
+
+&lt;script id="table-template" type="text/html"&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th&gt;Some Column&lt;/th&gt;
+        &lt;th&gt;Another Column&lt;/th&gt;
+        &lt;th&gt;Still More&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+
+    &lt;!-- want to insert collection items, here --&gt;
+    &lt;tbody&gt;&lt;/tbody&gt;
+
+    &lt;tfoot&gt;
+      &lt;tr&gt;
+        &lt;td colspan="3"&gt;some footer information&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tfoot&gt;
+  &lt;/table&gt;
+&lt;/script&gt;</pre>
+</div>
+<div class="section" id="view-itemviewcontainer">
+<h3>Потоа ги креираме view-ата и сетираме itemViewContainer.<a class="headerlink" href="#view-itemviewcontainer" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="docutils">
+<dt>RowView = Backbone.Marionette.ItemView.extend({</dt>
+<dd>tagName: &#8220;tr&#8221;,
+template: &#8220;#row-template&#8221;</dd>
+</dl>
+<p>});</p>
+<dl class="docutils">
+<dt>TableView = Backbone.Marionette.CompositeView.extend({</dt>
+<dd><p class="first">itemView: RowView,</p>
+<p>// specify a jQuery selector to put the itemView instances in to
+itemViewContainer: &#8220;tbody&#8221;,</p>
+<p class="last">template: &#8220;#table-template&#8221;</p>
+</dd>
+</dl>
+<p>});</p>
+</div></blockquote>
+<p>Истиот елемент можеме да го сетираме и во функцијата appendHtml.</p>
+</div>
+</div>
+<div class="section" id="marionette-layout">
+<h2>Marionette.Layout<a class="headerlink" href="#marionette-layout" title="Permalink to this headline">¶</a></h2>
+<p>Layout е хибрид од ItemView и колекција од региони. Layout-ите се идеални за рендерирање на
+layout-и за апликации со повеќе региони. Во следниот пример ќе покажеме како се употребува layout
+во една Marionette апликација.</p>
+<div class="highlight-python"><pre>&lt;script id="layout-template" type="text/template"&gt;
+  &lt;section&gt;
+    &lt;navigation id="menu"&gt;...&lt;/navigation&gt;
+    &lt;article id="content"&gt;...&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/script&gt;</pre>
+</div>
+<div class="highlight-python"><pre>AppLayout = Backbone.Marionette.Layout.extend({
+  template: "#layout-template",
+
+  regions: {
+    menu: "#menu",
+    content: "#content"
+  }
+});
+
+var layout = new AppLayout();
+layout.render();</pre>
+</div>
+<div class="section" id="layout">
+<h3>Откако ќе се изрендерира layout-от имаме целосен пристап до неговите региони.<a class="headerlink" href="#layout" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>layout.menu.show(new MenuView());</p>
+<p>layout.content.show(new MainContentView());</p>
+</div></blockquote>
+<p>Регионите можат да бидат додадени и избришани по потреба. Методи за додавање и бришење на
+региони се addRegion, addRegions, removeRegion.</p>
+</div>
+<div class="section" id="addregion">
+<h3>addRegion<a class="headerlink" href="#addregion" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>var layout = new MyLayout();</p>
+<p>// ...</p>
+<p>layout.addRegion(&#8220;foo&#8221;, &#8220;#foo&#8221;);
+layout.foo.show(new someView());</p>
+</div></blockquote>
+</div>
+<div class="section" id="addregions">
+<h3>addRegions<a class="headerlink" href="#addregions" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>var layout = new MyLayout();</p>
+<p>// ...</p>
+<dl class="docutils">
+<dt>layout.addRegions({</dt>
+<dd>foo: &#8220;#foo&#8221;,
+bar: &#8220;#bar&#8221;</dd>
+</dl>
+<p>});</p>
+</div></blockquote>
+</div>
+<div class="section" id="removeregions">
+<h3>removeRegions<a class="headerlink" href="#removeregions" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p>var layout = new MyLayout();</p>
+<p>// ...</p>
+<p>layout.removeRegion(&#8220;foo&#8221;);</p>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="application">
+<h2>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h2>
+<p>Backbone.Marionette.Application објектот е центар на вашата композитна апликација.
+Тој организира, иницијализира и координира различни парчиња во вашата апликација. Исто така
+обезбедува појдовна точка за повикување. Апликацијата е наменета да се инстанцира директно, но
+доколку сакате можете да и додадете екстра функционалност.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>MyApp = new Backbone.Marionette.Application();</pre>
+</div>
+<p>Вашата апликација треба според дефинираните рутери да ја прикажува содржината од поставените региони, да
+ја менува содржината на регионите и друго. За да ја завршиме цела таа работа нас ни е потребно да го
+сетираме addInitializer на апликацијата.
+:::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>MyApp.addInitializer(function(options){
+  // do useful stuff here
+  var myView = new MyView({
+    model: options.someModel
+  });
+  MyApp.mainRegion.show(myView);
+});
+
+MyApp.addInitializer(function(options){
+  new MyAppRouter();
+  Backbone.history.start();
+});</pre>
+</div>
+<p>Овие методи ќе се извршат кога ќе ја стартуваме апликацијата.
+Во својот животен циклус апликацијата повикува неколку евенти: &#8220;initialize:before&#8221; / onInitializeBefore кој
+се извршува пред да се иницијализира апликацијата, &#8220;initialize:after&#8221; / onInitializeAfter кој се извршува
+веднаш после иницијализација на апликацијата и &#8220;start&#8221; / onStart којшто се извршува после
+initialize и неговите евенти.
+::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>MyApp.on("initialize:before", function(options){
+  options.moreData = "Yo dawg, I heard you like options so I put some options in your options!"
+});
+
+MyApp.on("initialize:after", function(options){
+  if (Backbone.history){
+    Backbone.history.start();
+  }
+});</pre>
+</div>
+<p>Откако се во апликацијата е конфигурирано, апликацијата почнува со работа со повикување на
+MyApp.start(options). Оваа функција прима еден параметар со опции.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>var options = {
+  something: "some value",
+  another: "#some-selector"
+};
+
+MyApp.start(options);</pre>
+</div>
+<p>Секоја апликација доаѓа со инстанца од Backbone.Wreqr.EventAggregator што се нарекува app.vent.
+Таму можеме да ги додадеме сите глобални евенти којшто ќе ни бидат потребни низ целата апликација.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>MyApp = new Backbone.Marionette.Application();
+
+MyApp.vent.on("foo", function(){
+  alert("bar");
+});
+
+MyApp.vent.trigger("foo"); // =&gt; alert box "bar"</pre>
+</div>
+</div>
+<div class="section" id="router">
+<h2>Router<a class="headerlink" href="#router" title="Permalink to this headline">¶</a></h2>
+<p>Дефинирањето на рутите во Marionette е исто како и во Backbone. На секоја дефиниција за рута
+сетираме метод во рутерот.
+Пример:
+::::::</p>
+<div class="highlight-python"><pre>MyRouter = Backbone.Marionette.AppRouter.extend({
+  // "someMethod" must exist at controller.someMethod
+  appRoutes: {
+    "some/route": "someMethod"
+  },
+
+  /* standard routes can be mixed with appRoutes/Controllers above */
+  routes : {
+    "some/otherRoute" : "someOtherMethod"
+  },
+  someOtherMethod : function(){
+    // do something here.
+  }
+
+});</pre>
+</div>
+<p>Рутерите може да се користат само во controller објект. Тие може да се дефинираат во
+рутер-от или на контролерот може да сетираме рутер.
+::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>someController = {
+  someMethod: function(){ /*...*/ }
+};
+
+Backbone.Marionette.AppRouter.extend({
+  controller: someController
+});</pre>
+</div>
+<div class="highlight-python"><pre>myObj = {
+  someMethod: function(){ /*...*/ }
+};
+
+new MyRouter({
+  controller: myObj
+});</pre>
+</div>
+</div>
+<div class="section" id="controller">
+<h2>Controller<a class="headerlink" href="#controller" title="Permalink to this headline">¶</a></h2>
+<p>Овој објект се користи како контролер за модулите и рутерите, и како посредник за работа и координација
+на другите објекти, view-ата и многу повеќе. Marionette.Controller може да биде проширен (extended)
+како и сите други Backbone и Marionette објекти. Го поддржува стандардниот initialize метод.
+Еве еден пример како се користи Controller.
+::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>// define a controller
+var MyController = Marionette.Controller.extend({
+
+  initialize: function(options){
+    this.stuff = options.stuff;
+  },
+
+  doStuff: function(){
+    this.trigger("stuff:done", this.stuff);
+  }
+
+});
+
+// create an instance
+var c = new MyController({
+  stuff: "some stuff"
+});
+
+// use the built in EventBinder
+c.listenTo(c, "stuff:done", function(stuff){
+  console.log(stuff);
+});
+
+// do some stuff
+c.doStuff();</pre>
+</div>
+<p>Исто како и сите view-а во Marionette и контролерот има метод close којшто се грижи да ги избрише
+сите евенти кои се директно закачени на инстанцата на контролерот.
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</p>
+<div class="highlight-python"><pre>// define a controller with an onClose method
+var MyController = Marionette.Controller.extend({
+
+  onClose: function(){
+    // put custom code here, to close this controller
+  }
+
+})
+
+// create a new controller instance
+var contr = new MyController();
+
+// add some event handlers
+contr.on("close", function(){ ... });
+contr.listenTo(something, "bar", function(){...});
+
+// close the controller: unbind all of the
+// event handlers, trigger the "close" event and
+// call the onClose method
+controller.close();</pre>
+</div>
+<p>Ова е само мал дел од тоа што го нуди овој плагин на Backbone, за да може да го совладате целиот матерјал
+следуваат неколку линкови кадешто подетално е објаснето за Marionette.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://marionettejs.com/">http://marionettejs.com/</a></li>
+<li><a class="reference external" href="http://addyosmani.github.io/backbone-fundamentals/#marionettejs-backbone.marionette">http://addyosmani.github.io/backbone-fundamentals/#marionettejs-backbone.marionette</a></li>
+<li><a class="reference external" href="https://github.com/marionettejs/backbone.marionette">https://github.com/marionettejs/backbone.marionette</a></li>
+</ul>
+</div></blockquote>
+<p>Пред да се зафатите со работа, исто така убаво е да ја прочитате и следната книга којашто објаснува
+како да ги решавате проблемите во огромните javascript апликации.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">http://addyosmani.com/resources/essentialjsdesignpatterns/book/</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="python.html" title="Python"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="backbone.html" title="Backbone.js"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

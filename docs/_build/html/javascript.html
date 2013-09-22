@@ -1,0 +1,367 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Javascript &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="next" title="Backbone.js" href="backbone.html" />
+    <link rel="prev" title="CSS" href="css.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="backbone.html" title="Backbone.js"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="css.html" title="CSS"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Javascript</a><ul>
+<li><a class="reference internal" href="#id2">Променливи</a></li>
+<li><a class="reference internal" href="#id3">Функции</a></li>
+<li><a class="reference internal" href="#id4">Објекти</a></li>
+<li><a class="reference internal" href="#object-methods">Object methods</a></li>
+<li><a class="reference internal" href="#arrays">Arrays</a></li>
+<li><a class="reference internal" href="#loops-for">Loops (for циклус)</a></li>
+<li><a class="reference internal" href="#if-else">if/else</a></li>
+<li><a class="reference internal" href="#id5">Логички оператори</a></li>
+<li><a class="reference internal" href="#id6">Резервирани зборови</a></li>
+<li><a class="reference internal" href="#query">јQuery</a></li>
+<li><a class="reference internal" href="#jquery">jQuery селектори</a></li>
+<li><a class="reference internal" href="#html-jquery">Креирање на нови тагови (HTML елементи) со помош на jQuery:</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="css.html"
+                        title="previous chapter">CSS</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="backbone.html"
+                        title="next chapter">Backbone.js</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/javascript.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="javascript">
+<span id="id1"></span><h1>Javascript<a class="headerlink" href="#javascript" title="Permalink to this headline">¶</a></h1>
+<p>Javascript е скриптен јазик којшто може да биде вметнат во HTML страна.
+Овој програмски јазик се користи за регирање на
+евенти (пример: клик на копче, клик на слика, вчитување на страна ... ),
+за промена на содржината во HTML, за промена на CSS стилови,
+валидација на input полиња и се извршува во сите модерни Browser- и.</p>
+<div class="section" id="id2">
+<h2>Променливи<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Променливите се користат за чување на вредност која можеме да ја употребиме
+подоцна во кодот. Променливите може да чуваат секаков тип на вредност: текст,
+бројки, листа, објект, дури и код (во форма на функција).
+Променливите се декларираат со <tt class="docutils literal"><span class="pre">var</span></tt>.</p>
+<div class="highlight-python"><pre>var myName = “Oliver”;
+var a = 1, b = “primer”;</pre>
+</div>
+<p>Кога употребуваме некоја вредност повеќепати, тогаш потребно е да се искористи променлива.</p>
+<p>Во javascript постојат 5 примитивни типови на променливи: <tt class="docutils literal"><span class="pre">string(text)</span></tt>, <tt class="docutils literal"><span class="pre">boolean(true/false)</span></tt>,
+<tt class="docutils literal"><span class="pre">numbers</span></tt>, <tt class="docutils literal"><span class="pre">undefined</span></tt>, <tt class="docutils literal"><span class="pre">null</span></tt>. Другото се се третира како објект.</p>
+</div>
+<div class="section" id="id3">
+<h2>Функции<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>Функциите овозможуваат помали програмски блокови да бидат поделени во една целина.</p>
+<div class="highlight-python"><pre>var zbir = function(a, b) {
+        return a+b;
+}</pre>
+</div>
+<p>Или:</p>
+<div class="highlight-python"><pre>function zbir(a, b) {
+        return a+b;
+}</pre>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>Објекти<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Како и во повеќето други програмски јазици, исто и во javascript се користат
+објекти.</p>
+<div class="highlight-python"><pre>var person = {
+        first_name: “John”,
+        last_name: “Doe”
+};</pre>
+</div>
+<p>Објектот на примерот се состои од две променливи <tt class="docutils literal"><span class="pre">first_name</span></tt> и <tt class="docutils literal"><span class="pre">last_name</span></tt>.
+До нив се пристапува со точка, t.e. <tt class="docutils literal"><span class="pre">person.first_name</span></tt> или <tt class="docutils literal"><span class="pre">person.last_name</span></tt>.</p>
+</div>
+<div class="section" id="object-methods">
+<h2>Object methods<a class="headerlink" href="#object-methods" title="Permalink to this headline">¶</a></h2>
+<p>Методи во објектите се параметри во објектот кои нивните вредности се функции.:</p>
+<div class="highlight-python"><pre>var person = {
+        first_name: “John”,
+        last_name: “Doe”,
+        get_person: functin() {
+                alert(this.first_name, this.last_name);
+        }
+};</pre>
+</div>
+<p>За да пристапиме до методот get_person само додаваме на објектот <tt class="docutils literal"><span class="pre">person.get_person()</span></tt>;
+Значењето на зборот this. Во секој метод, во секоја функција постои овој збор – <tt class="docutils literal"><span class="pre">this</span></tt>;
+Се однесува на објектот во кој функцијата е повикана. Тоа значи дека кога го
+повикуваме <tt class="docutils literal"><span class="pre">person.get_person()</span></tt>, можеме да го користиме зборот this во функцијата <tt class="docutils literal"><span class="pre">get_person()</span></tt>,
+за да пристапиме до објектот person, директно од методот <tt class="docutils literal"><span class="pre">get_person()</span></tt>.</p>
+</div>
+<div class="section" id="arrays">
+<h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
+<p>Низите се тип на објекти кој се чуваат во листи од вредности.
+Добро е да се чуваат како сет од слични вредности со ист тип, на пример strings.</p>
+<p>Пример за array:</p>
+<div class="highlight-python"><pre>var myArray = [ 'a', 'b', 'c' ];</pre>
+</div>
+<p>Пристап до некој член во низата: <tt class="docutils literal"><span class="pre">myArray[0]</span></tt>.</p>
+</div>
+<div class="section" id="loops-for">
+<h2>Loops (for циклус)<a class="headerlink" href="#loops-for" title="Permalink to this headline">¶</a></h2>
+<p>Како и во секој програмски јазик и во јаваскрипт постои ја има употребата на for циклус.
+Со употреба на for циклус можеме да направиме итерација врз една низа.
+Пример:</p>
+<div class="highlight-python"><pre>var myArray = [ 'a', 'b', 'c' ];
+var i;
+var len = myArray.length;
+
+for (i = 0; i &lt; len; i = i + 1) {
+        console.log( 'item at index ' + i + ' is ' + myArray[ i ] );
+}</pre>
+</div>
+<p>Променливата <tt class="docutils literal"><span class="pre">i</span></tt> ја користиме како индекс, стартува од <tt class="docutils literal"><span class="pre">0</span></tt> и се инкрементира за еден
+се додека не ја достигне должината на низата.</p>
+</div>
+<div class="section" id="if-else">
+<h2>if/else<a class="headerlink" href="#if-else" title="Permalink to this headline">¶</a></h2>
+<p>Исто така како и во повеќето програмски јазици, така и во javascript постои if/else.
+Се користи да се провери вистинитоста. Во javascript повеќето објекти се вистинити,
+т.е. True. Единствено следните 5 се false: undefined, null, NaN, 0, “”.
+Кога сакаме да тестираме дали некоја вредност е false, тогаш користиме ! Оператор.</p>
+<p>Примери</p>
+<div class="highlight-python"><pre>var a = '';
+
+if ( !a ) {
+  // Овој код ќе се изврши ако 'a' е false;
+  console.log( 'a was falsy' );
+}
+
+var notANumber = 'four' - 'five';
+
+if ( !notANumber ) {
+  // this code will run
+  console.log( '!notANumber was truthy' );
+}</pre>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Логички оператори<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Логички оператори кои се користат во javascript се: И(&amp;&amp;) и ИЛИ(||) операторите.
+Примери</p>
+<div class="highlight-python"><pre>var foo = 1;
+var bar = 0;
+var baz = 2;
+
+foo || bar;     // returns 1, which is truthy
+bar || foo;     // returns 1, which is truthy
+
+foo &amp;&amp; bar;     // returns 0, which is falsy
+foo &amp;&amp; baz;     // returns 2, which is truthy</pre>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>Резервирани зборови<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>Следната листа од зборови преставува листа од резервирани зборови во javascript:</p>
+<div class="highlight-python"><pre>abstract boolean break byte case catch char class const continue debugger
+default delete do double else enum export extends false final finally float
+for function goto if implements import in instanceof int interface long
+native new null package private protected public return short static super
+switch synchronized this throw throws transient true try typeof var
+volatile void while with</pre>
+</div>
+</div>
+<div class="section" id="query">
+<h2>јQuery<a class="headerlink" href="#query" title="Permalink to this headline">¶</a></h2>
+<p>jQuery е javascript библиотека којашто се користи за лесно да се манипулира со
+HTML страна откако ќе биде прикажана од browser-от. Исто така овозможува многу
+алатки кои помагаат на корисникот во интеракција со страната, како и алатки кои
+креираат анимации на страната и алатки кои ви дозволуваат директна комуникација
+со серверот без превчитување на страната.</p>
+<p>Што преставува знакот <tt class="docutils literal"><span class="pre">$</span></tt>?
+jQuery библиотеката преставува функција којашто ни дозволува да селектираме
+HTML елементи со помош на CSS селектори.</p>
+<div class="highlight-python"><pre>var listItems = jQuery( 'li' );</pre>
+</div>
+<p>или:</p>
+<div class="highlight-python"><pre>var listItems = $( 'li' );</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">$</span></tt> преставува кратенка за <tt class="docutils literal"><span class="pre">jQuery</span></tt>.</p>
+<p>За да бидеме сигурни дека е безбедно да користиме <tt class="docutils literal"><span class="pre">jQuery</span></tt> на нашата HTML страна,
+треба да се осигураме дека страната (DOM three) е целосно вчитана и е спремна за
+манипулација од страна на <tt class="docutils literal"><span class="pre">jQuery</span></tt> кодот. Тоа можеме да го исполниме со тоа што
+целиот код ќе го сместиме во <tt class="docutils literal"><span class="pre">$(document).ready();</span></tt>.</p>
+<div class="highlight-python"><pre>$( document ).ready(function() {
+  console.log( 'ready!' );
+});</pre>
+</div>
+</div>
+<div class="section" id="jquery">
+<h2>jQuery селектори<a class="headerlink" href="#jquery" title="Permalink to this headline">¶</a></h2>
+<p>Ако имате претходно познавање на CSS тогаш употребата на селектори во jQuery ќе ви биде
+многу едноставна. Имено CSS селекторите се сместуваат во $();</p>
+<p>Пример:</p>
+<div class="highlight-python"><pre>$( '#header' ); // select the element with an ID of 'header'
+$( 'li' );      // select all list items on the page
+$( 'ul li' );   // select list items that are in unordered lists
+$( '.person' ); // select all elements with a class of 'person'</pre>
+</div>
+<p>Други начини за да се креираат jQuery објекти.</p>
+<div class="highlight-python"><pre>// create a jQuery object from a DOM element
+$( document.body.children[0] );
+
+// create a jQuery object from a list of DOM elements
+$( [ window, document ] );
+
+// make a selection in the context of a DOM element
+var firstBodyChild = document.body.children[0];
+$( 'li', firstBodyChild );
+
+// make a selection within a previous selection
+var paragraph = $( 'p' );
+$( 'a', paragraph );</pre>
+</div>
+<p>За да провериме дали нашата селекција е успешна, т.е. дали селекторот пронашол таг
+во HTML-от на страната можеме да искористиме</p>
+<div class="highlight-python"><pre>if ( $( '#nonexistent' ) ) {
+  // Wrong! This code will always run!
+}
+
+if ( $( '#nonexistent' ).length &gt; 0 ) {
+  // Correct! This code will only run if there's an element in your page
+  // with an ID of 'nonexistent'
+}
+
+if ( $( '#nonexistent' ).length ) {
+  // This code will only run if there's a matching element
+}</pre>
+</div>
+</div>
+<div class="section" id="html-jquery">
+<h2>Креирање на нови тагови (HTML елементи) со помош на jQuery:<a class="headerlink" href="#html-jquery" title="Permalink to this headline">¶</a></h2>
+<p>Ако му додадете HTML на <tt class="docutils literal"><span class="pre">$()</span></tt> можете да креиратe елемент во меморијата.
+Тој елемент ќе биде креиран но нема да биде прикажан на страната се додека
+вие прилепите на некој постоечки елемент.</p>
+<div class="highlight-python"><pre>$( '&lt;p&gt;' ); // creates a new &lt;p&gt; element with no content
+$( '&lt;p&gt;Hello!&lt;/p&gt;' ); // creates a new &lt;p&gt; element with content
+$( '&lt;p class="greet"&gt;Hello!&lt;/p&gt;' ); // creates a new &lt;p&gt; with content and class</pre>
+</div>
+<p>Исто така можете да креирате елемент со прикачување на информации за тоа како сакате
+да го креирате елементот.</p>
+<div class="highlight-python"><pre>$( '&lt;p&gt;', {
+  html: 'Hello!',
+  'class': 'greet'
+});</pre>
+</div>
+<p>Во овој туторијал на кратко спомнавме за javascript и за нејзината најупотребувана
+библиотека jQuery. За подетално да се запознаете со овој програмски јазик, неговите техники
+на работење како и користењето на библиотеката jQuery и нејзиниот плагин за кориснички интерфејс
+може да ги погледнете на следните линкови:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://www.w3schools.com/js/">http://www.w3schools.com/js/</a></li>
+<li><a class="reference external" href="http://www.w3schools.com/jquery/">http://www.w3schools.com/jquery/</a></li>
+<li><a class="reference external" href="http://jquery.com/">http://jquery.com/</a></li>
+<li><a class="reference external" href="http://jqueryui.com/">http://jqueryui.com/</a></li>
+<li><a class="reference external" href="http://jqfundamentals.com/chapter/jquery-basics">http://jqfundamentals.com/chapter/jquery-basics</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="backbone.html" title="Backbone.js"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="css.html" title="CSS"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>

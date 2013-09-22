@@ -1,0 +1,364 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>CSS &mdash; SocialNet 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SocialNet 1.0 documentation" href="index.html" />
+    <link rel="next" title="Javascript" href="javascript.html" />
+    <link rel="prev" title="HTML" href="html.html" /> 
+  </head>
+  <body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="javascript.html" title="Javascript"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="html.html" title="HTML"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">CSS</a><ul>
+<li><a class="reference internal" href="#id2">Коментари</a></li>
+<li><a class="reference internal" href="#properties">Својства(Properties)</a></li>
+<li><a class="reference internal" href="#id4">Дефинирање на повеќе последователни вредности</a></li>
+<li><a class="reference internal" href="#padding">Внатрешно оддалечување(Padding)</a></li>
+<li><a class="reference internal" href="#margin">Надворешно оддалечување(Margin)</a></li>
+<li><a class="reference internal" href="#id5">Селектори</a></li>
+<li><a class="reference internal" href="#html">Директни селектори (на HTML елементи)</a></li>
+<li><a class="reference internal" href="#class">Class – Селектори именувани како класи</a></li>
+<li><a class="reference internal" href="#id">ID – Уникатен селектор за идентификација</a></li>
+<li><a class="reference internal" href="#id7">Атрибут селектори</a></li>
+<li><a class="reference internal" href="#id9">Под-селектори</a></li>
+<li><a class="reference internal" href="#id11">Универзални селектори</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="html.html"
+                        title="previous chapter">HTML</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="javascript.html"
+                        title="next chapter">Javascript</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/css.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="css">
+<span id="id1"></span><h1>CSS<a class="headerlink" href="#css" title="Permalink to this headline">¶</a></h1>
+<p>Cascading Style Sheets (CSS) е стилски јазик кој служи за форматирање и разубавување на
+документ напишан во markup јазик најчесто во HTML или XTML.</p>
+<div class="section" id="id2">
+<h2>Коментари<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Исти така и во CSS можат да се додаваат коментари кои нема да бидат
+прикажани во прилистувачот. Пример:</p>
+<div class="highlight-python"><pre>/* Ова е коментар во една линија. */
+
+/* Овој коментар
+iе напишан
+во повеќе линии*/</pre>
+</div>
+</div>
+<div class="section" id="properties">
+<h2>Својства(Properties)<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<p>Својствата се дефинирани во селектори со кој што менуваме/додаваме
+последователна вредност. Синтакса:</p>
+<div class="highlight-python"><pre>selector {
+   property: value;
+}</pre>
+</div>
+<p>Пример:</p>
+<div class="highlight-python"><pre>h1 {
+color: red;
+}</pre>
+</div>
+<p>На <a class="reference external" href="http://www.htmldog.com/reference/cssproperties/">линков</a> може да најдете
+подетални информации за оваа целина.</p>
+</div>
+<div class="section" id="id4">
+<h2>Дефинирање на повеќе последователни вредности<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>Секое CSS правило може да има повеќе од една вредност.
+Секоја од нив се реплицира на бараната вредност. Пример:</p>
+<div class="highlight-python"><pre>h1 {
+  font-size: 24px;
+  font-weight: bold;
+  border: 1px solid black;
+  color: pink;
+}
+
+/* Ова ќе ги направи сите &lt;h1&gt; наслови големи (big),
+задебелени (bold), розеви (pink), и заокружени со црна ивица (border)! */</pre>
+</div>
+</div>
+<div class="section" id="padding">
+<h2>Внатрешно оддалечување(Padding)<a class="headerlink" href="#padding" title="Permalink to this headline">¶</a></h2>
+<p>Padding е растојанието помеѓу содржината и ивицата(border). Неговите вредности
+можеме да ги промениме со CSS, како на пример да се помести подалеку
+или поблиску до содржината. Во примерот подоле на дивот со идентификација
+<tt class="docutils literal"><span class="pre">box</span></tt> му кажуваме таа да биде само 10 пиксели одалечен од неговата содржина.:</p>
+<div class="highlight-python"><pre>#box {
+  padding: 10px;
+}</pre>
+</div>
+</div>
+<div class="section" id="margin">
+<h2>Надворешно оддалечување(Margin)<a class="headerlink" href="#margin" title="Permalink to this headline">¶</a></h2>
+<p>Маргината е растојанието што сите елементи го имаат помеѓу себе. Истите можеме
+независно да ги менуваме. Во наредниот пример ова растојание е 10 пиксели на
+горниот и долниот дел од елементот, додека на страните (лево и десно)
+само 5 пиксели. (Кога вредностите се напишани во низа ги читаме во насока на
+стрелките, односно горе (top), десно (right), доле (bottom) и лево (left).
+Истите можат да бидат прикажани и како <tt class="docutils literal"><span class="pre">#box2</span></tt>, но просторот во кодот кој
+го зафаќаат е поголем.) Пример:</p>
+<div class="highlight-python"><pre>#box {
+  margin: 10px 5px 10px 5px;
+}
+#box2 {
+    margin-top:  10px;
+    margin-right: 5px;
+    margin-bottom:  10px;
+    margin-left: 5px;
+}</pre>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>Селектори<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>Селекторите се користат за да му дадат конкретна насока на CSS документот кои
+од елементите во HTML-от да ги менува, односно само на кои да делува.
+За истата намена можете да ги користите на повеќе различни начини. Синтакса:</p>
+<div class="highlight-python"><pre>selector {
+  rules;
+  rules;
+  rules;
+}</pre>
+</div>
+<p>Повеќе информации може да најдете на следниов
+<a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started/Selectors">линк</a>.</p>
+</div>
+<div class="section" id="html">
+<h2>Директни селектори (на HTML елементи)<a class="headerlink" href="#html" title="Permalink to this headline">¶</a></h2>
+<p>Можете веднаш да менувате атрибути на делови од самиот HTML во зависност каде
+се наоѓаат во истиот. Тоа можете да го направите со едноставно пишување на
+името на тагот, на пример <tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;h1&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;p&gt;</span></tt>. Но внимавајте бидејќи
+оваа измена ќе делува на сите елементи во HTML-от со тој таг. Пример:</p>
+<div class="highlight-python"><pre>body {
+  background-color: #333;
+}
+
+h1 {
+  color: blue;
+}
+
+a {
+  text-underline: none;
+}</pre>
+</div>
+</div>
+<div class="section" id="class">
+<h2>Class – Селектори именувани како класи<a class="headerlink" href="#class" title="Permalink to this headline">¶</a></h2>
+<p>Во самиот HTML можете да селектирате и елементи по нивната Класа.
+За разлика од  уникатните селектори - Идентификатори (Id) овие можат да се
+повторуваат и доделуваат на повеќе елементи. Пример:</p>
+<div class="highlight-python"><pre>a.link {
+  font-size: 12px;
+}
+
+/* HTML Selected: &lt;a href="http://google.com" class="link"&gt;,
+&lt;a href="http://codecademy.com" class="link jumbo"&gt; */
+
+.jumbo {
+  text-size: 1000px;
+}
+
+/* HTML Selected: &lt;a href="http://codecademy.com" class="link jumbo"&gt;,
+&lt;span class="jumbo"&gt; */</pre>
+</div>
+</div>
+<div class="section" id="id">
+<h2>ID – Уникатен селектор за идентификација<a class="headerlink" href="#id" title="Permalink to this headline">¶</a></h2>
+<p>ID – Како што и самото име објаснува, овие селектори се уникатни и неповторливи
+за разлика од горенаведените класи. Пример:</p>
+<div class="highlight-python"><pre>#thatThingINeededToStyle {
+  color: blue;
+  font-size: 24px;
+}
+
+/* HTML Selected: &lt;span id="thatThingINeededToStyle"&gt; */
+
+a#codecademy {
+  color: purple;
+}
+
+/* HTML Selected: &lt;a href="http://codecademy.com" id="codecademy"&gt; */</pre>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>Атрибут селектори<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>HTML елементите можат исто така да бидат селектирани и според нивниот атрибут.
+Пример:</p>
+<div class="highlight-python"><pre>a[href="http://codecademy.com"] {
+  color: purple;
+}
+
+/* HTML Selected: &lt;a href="http://codecademy.com"&gt; */
+
+input[type="text"] {
+  width: 100px;
+}
+
+/* HTML Selected: &lt;input type="text"&gt; */
+
+input[required] {
+  border: 1px red solid;
+}
+
+/* HTML Selected: &lt;input type="text" required&gt; */</pre>
+</div>
+<p>Повеќе за оваа  целина можете да прочитата на
+<a class="reference external" href="http://dev.opera.com/articles/view/27-css-basics/#attribute">линков</a>.</p>
+</div>
+<div class="section" id="id9">
+<h2>Под-селектори<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p>Секако можете да користите и повеќе селектори за да го добиете бараниот елемент,
+со користење на под-селектори (parental nesting). Со користење на
+„знакот за поголемо“ <tt class="docutils literal"><span class="pre">&gt;</span></tt>, директно го селектирате неговиот под-елемент,
+одејќи едно ниво подоле. Пример:</p>
+<div class="highlight-python"><pre>ul &gt; li {
+  display: inline-block
+}
+
+ul a {
+  text-underline: none;
+}
+
+ul + span {
+  display: inline;
+}
+
+a ~ h1 {
+  color: blue;
+}</pre>
+</div>
+<p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Descendant_selectors">Повеќе</a>.</p>
+</div>
+<div class="section" id="id11">
+<h2>Универзални селектори<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>Универзалните селектори <tt class="docutils literal"><span class="pre">*</span></tt> можат да се користат за да селектираат цели делови.
+Пример:</p>
+<div class="highlight-python"><pre>* {
+  background-color: blue;
+}
+
+/* Ги селектира сите елементи во HTML-от */
+
+body * {
+  color: red;
+}
+
+/* Ги селектира сите елементи во тагот - body */
+
+div &gt; * {
+  color: red;
+}
+
+/*  Ги селектира сите првостепени divs тагови во страната */</pre>
+</div>
+<p>На следниве линкови можете да најдете повеќе информации за оваа целина:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors">https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors</a></li>
+<li><a class="reference external" href="http://www.stevesouders.com/blog/2009/06/18/simplifying-css-selectors/">http://www.stevesouders.com/blog/2009/06/18/simplifying-css-selectors/</a></li>
+<li><a class="reference external" href="http://dev.opera.com/articles/view/27-css-basics/#universal">http://dev.opera.com/articles/view/27-css-basics/#universal</a></li>
+</ul>
+<p>Повеќе детални информации со можност за тестирање на истите за HTML, CSS
+можете да најдете на <a class="reference external" href="http://www.w3schools.com/">w3schools</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="javascript.html" title="Javascript"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="html.html" title="HTML"
+             >previous</a> |</li>
+        <li><a href="index.html">почетна</a>|&nbsp;</li>
+        <li><a href="search.html">пребарување</a>|&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Vorteks ED.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b2.
+    </div>
+  </body>
+</html>
