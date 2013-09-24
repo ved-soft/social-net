@@ -6,21 +6,20 @@
 Backbone.js
 ***********
 
-Backbone.js
-Backbone e javascript библиотека со RESTful JSON интерфејс и е базирана на 
-MVP (Model, View, Presenter) дизајн. Backbone e позната како полесна 
-библиотека, која е зависна само од javascript и Underscore.js. 
-Дизајнирана е за изработка на single-page веб апликации.
+``Backbone`` e ``javascript`` библиотека со ``RESTful JSON`` интерфејс и е базирана на 
+``MVP (Model, View, Presenter)`` дизајн. ``Backbone`` e позната како полесна 
+библиотека, која е зависна само од javascript и ``Underscore.js``. 
+Дизајнирана е за изработка на ``single-page`` веб апликации.
 
 
 Model
 -----
 
-Модел во Backbone.js преставува срцето на една Javascript апликација. 
+Модел во ``Backbone.js`` преставува срцето на една ``Javascript`` апликација. 
 Тој ги содржи податоците со потребната логика за нив, како конверзија, 
 валидација, привилегии и слично.
 
-Пример за Backbone модел.::
+Пример за ``Backbone`` модел. ::
 
 	Person = Backbone.Model.extend({
         initialize: function(){
@@ -30,10 +29,9 @@ Model
     
     var person = new Person;
 
-Функцијата initialize() се повикува секогаш при креирање на инстанца од тој модел. 
-Исто важи и за collection и view. 
-Откако ќе креираме инстанца од некој модел за да сетираме параметри на тој модел користиме:
-::   
+Функцијата ``initialize()`` се повикува секогаш при креирање на инстанца од тој модел. 
+Исто важи и за ``collection`` и ``view``. 
+Откако ќе креираме инстанца од некој модел за да сетираме параметри на тој модел користиме::   
 
    Person = Backbone.Model.extend({
         initialize: function(){
@@ -47,9 +45,8 @@ Model
     person.set({ name: "Thomas", age: 67});
 
 
-Значи за сетирање на атрибути на модел користиме model.set(). Сега кога моделот има 
-сетирано параметри можеме да ги земеме користејќи model.get().
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Значи за сетирање на атрибути на модел користиме ``model.set()``. Сега кога моделот има 
+сетирано параметри можеме да ги земеме користејќи ``model.get()``. ::
 
 	Person = Backbone.Model.extend({
         initialize: function(){
@@ -63,9 +60,8 @@ Model
     var name = person.get("name"); // "Thomas"
     var child = person.get("child"); // 'Ryan'
 
-На моделите некогаш имаме потреба да имаме default вредности. Начинот на дефинирање 
-на default вредности е следен:
-::::::::::::::::::::::::::::::
+На моделите некогаш имаме потреба да имаме ``default`` вредности. Начинот на дефинирање 
+на default вредности е следен::
 
 	Person = Backbone.Model.extend({
         defaults: {
@@ -84,9 +80,8 @@ Model
     var name = person.get("name"); // "Thomas"
     var child = person.get("child"); // 'Ryan'
 
-Моделите исто така можат да содржат методи во нив. По default сите методи во еден 
-модел се public.
-::::::::::::::::
+Моделите исто така можат да содржат методи во нив. По ``default`` сите методи во еден 
+модел се ``public``. ::
 
 	Person = Backbone.Model.extend({
         defaults: {
@@ -108,7 +103,7 @@ Model
 
 Сите атрибути на моделот може да имаат функции кои чекаат на промени на атрибутот. 
 Тие функции се повикуваат секогаш на промена на избраниот параметар. 
-Во следниот пример, при промена на name атрибутот на person моделот ќе го алертува новото име.::
+Во следниот пример, при промена на name атрибутот на ``person`` моделот ќе го алертува новото име. ::
 
    Person = Backbone.Model.extend({
         defaults: {
@@ -127,20 +122,21 @@ Model
     var person = new Person({ name: "Thomas", age: 67});
     person.set({name: 'Stewie Griffin'}); // This triggers a change and will alert()
 
-Доколку сакаме да имаме listener кои ќе слуша на промени на сите атрибути, 
-едноставно користиме: this.on("change", function(model){});
+Доколку сакаме да имаме ``listener`` кои ќе слуша на промени на сите атрибути, 
+едноставно користиме: ``this.on("change", function(model){})``;
+
 
 Collection
 ----------
 
-Backbone collections преставуваат низа од модели. 
-На пример може да се користи во ситуации како::
+``Backbone collections`` преставуваат низа од модели. 
+На пример може да се користи во ситуации како ::
 
 	Model: Student, Collection: ClassStudents
 	Model: Todo Item, Collection: Todo List
 	Model: Animal, Collection: Zoo
 
-Пример за model/collection::
+Пример за ``model/collection`` ::
 
    var Song = Backbone.Model.extend({
      initialize: function(){
@@ -163,10 +159,9 @@ Backbone collections преставуваат низа од модели.
 View
 ----
 
-Кодот за view-то наликува исто како на моделот. Се користи за прикажување на одреден дел на страната. 
-За рендерирање на темплејти се користи Underscore.js темплејт. 
-За манипулација на DOM се користи jQuery. Пример за едно view:
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Кодот за ``view``-то наликува исто како на моделот. Се користи за прикажување на одреден дел на страната. 
+За рендерирање на темплејти се користи ``Underscore.js`` темплејт. 
+За манипулација на ``DOM`` се користи ``jQuery``. Пример за едно ``view``::
 
 	SearchView = Backbone.View.extend({
         initialize: function(){
@@ -178,9 +173,8 @@ View
     // Consider it the constructor of the class.
     var search_view = new SearchView();
 
-Параметарот el референцира до DOM објектот креиран во browser-от. Секој Backbone View 
-има еден el параметар, кој ако не е дефиниран, по default backbone ќе креира празен div елемент.
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Параметарот ``el`` референцира до DOM објектот креиран во ``browser``-от. Секој ``Backbone View`` 
+има еден ``el`` параметар, кој ако не е дефиниран, по ``default`` ``backbone`` ќе креира празен ``div`` елемент. ::
 
 	<div id="search_container"></div>
 
@@ -195,10 +189,9 @@ View
 	</script>
 
 Сите евенти што се повикуваат мора да бидат во овој елемент.
-Вчитувањето на темплејти во Backbone е целосно зависно од Underscore.js. Во следниот пример 
-ќе имплементираме render() функција која што ќе се повикува на иницијализација на view-то 
-и ќе го прикачиме на el параметарот користејќи jQuery.
-::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Вчитувањето на темплејти во ``Backbone`` е целосно зависно од ``Underscore.js``. Во следниот пример 
+ќе имплементираме ``render()`` функција која што ќе се повикува на иницијализација на view-то 
+и ќе го прикачиме на el параметарот користејќи ``jQuery``. ::
 	
 	<script type="text/template" id="search_template">
   		<label>Search</label>
@@ -224,8 +217,8 @@ View
     	var search_view = new SearchView({ el: $("#search_container") });
 	</script>
 
-Евенти во Backbone View можат да се прикачат само на el елементот и на сите негови child елементи. 
-На следниот пример ќе прикажеме еден click евент на копче::
+Евенти во ``Backbone View`` можат да се прикачат само на ``el`` елементот и на сите негови ``child`` елементи. 
+На следниот пример ќе прикажеме еден ``click`` евент на копче ::
  
    <script type="text/template" id="search_template">
    	<label>Search</label>
@@ -256,10 +249,11 @@ View
    	    var search_view = new SearchView({ el: $("#search_container") });
    	</script>
 
+
 Router
 ------
 
-Backbone router се користи за рутирање на Backbone апликацијата со користење на хаштагови. 
+``Backbone router`` се користи за рутирање на ``Backbone`` апликацијата со користење на хаштагови. 
 Рутерите интерпретираат се што содржи после хаштагот и повикува функција дефинирана за патека.
 ::	
 	
@@ -282,7 +276,7 @@ Backbone router се користи за рутирање на Backbone апли
 	</script>
 	
 	
-Целосно отворено API за Backbone js, како и по опширна документација може да најдете на 
+Целосно отворено ``API`` за ``Backbone js``, како и по опширна документација може да најдете на 
 следните линкови:
 	
 	* `<http://backbonejs.org/>`_
